@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,400;1,300;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;1,200;1,300;1,400&family=Water+Brush&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Noto Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(59deg, #000000 , #274EDD);
+}
+
+.darkMode{
+    background: linear-gradient(59deg, #000000 , #274EDD);
+}
+
+/* mode change styling start here */
+
+.btnMode{
+    float: right;
+    margin-top: 1em;
+    margin-right: 2em;
+}
+
+.btnMode:hover{
+    box-shadow: 0 0 2rem 0 rgb(254, 252, 252) !important;
+    border-radius: 5px !important;
+}
+
+/* go to line 31 for theme changing effect */
+
+/* mode change styling ends here */
+
+/* change theme work start here */
+
+.lightMode{
+    background: linear-gradient(115deg, #BEC4FE , #FFF7FA) !important;
+}
+/* change theme work ends here */
+
+
+nav a img{
+    float: left;
+    width: 10%;
+    height: 8%;
+    margin-left: 1%;
+    margin-top: 2%;
+}
+
+.imagestyle{
+    width: 32%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    float: left;
+    position: absolute;
+    top: 32%;
+    margin-left: 1%;
+}
+
+.imagestyle img{
+    width: 100%;
+    height: auto;
+}
+
+.logindiv{
+    width: 35%;
+    height: 65%;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    left: 50%;
+    top: 20%;
+}
+
+
+form{
+    width: 100%;
+    height: 100%;
+}
+
+form div h2{
+    text-align: center;
+    padding: 1em 0em;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+}
+
+form .input-fields{
+    width: 100%;
+    height: 8em;
+}
+
+form .input-fields .username-field{
+    width: 100%;
+    height: 5em;
+}
+
+form input{
+    margin: auto ;
+    background: none !important;
+    border: 1.5px solid white !important;
+    width: 80% !important;
+    letter-spacing: 1px;
+    color: black !important;
+    text-align: center;
+    margin-top: -1em;
+}
+
+form input[type='text']:focus + label[for="id_username"]{
+    margin-top: -3.2em;
+    background: #394D91;
+    padding: 0em .3em;
+    font-weight: 500;
+    color: white;
+    transition: .4s;
+}
+
+form input[type='password']:focus + label[for="id_password"]{
+    margin-top: -3.2em;
+    background: #384A8C;
+    padding: 0em .3em;
+    font-weight: 500;
+    color: white; 
+}
+
+.inputLabel{
+    margin-top: -3.2em;
+    background: #384A8C;
+    padding: 0em .3em;
+    font-weight: 500;
+    color: white;
+}
+
+.username-field div{
+    width: 55px;
+    height: 50px;
+}
+
+form label{
+    margin-top: -2em;
+    margin-left: 4em;
+    color: black;
+    letter-spacing: 1px;
+    transition: .4s;
+    cursor: text;
+}
+
+.btnStyle{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.btnStyle button{
+    width: 70% !important;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    background: linear-gradient(to top, #4675C0 , #8FC8EB);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: .5;
+    
+}
+
+.btnStyle button:hover{
+    background: #4675C0 !important;
+    transition: .5s;
+}
+
+.message{
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.message h6{
+    text-align: center;
+}
+
+.errorPopup{
+    width: 30%;
+    height: 25%;
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.errorPopup .head{
+    width: 100%;
+    height: 2.3em;
+    border-bottom: 2px solid grey;
+    border-radius: 5px;
+}
+
+.errorPopup .head h5{
+    float: left;
+    margin-left: 6em;
+    margin-top: .3em;
+    font-weight: bold;
+}
+
+.errorPopup .head a{
+    float: right;
+    text-decoration: none;
+    color: grey;
+    font-weight: bold;
+    margin-top: .3em;
+    margin-right: 1em;
+}
+
+.error-message {
+    padding: .5em ;
+    float: left;
+    word-break: break-all;
+    color: red;
+}
+
+.errorPopup .button{
+    margin-left: 10em;
+    margin-top: 0em;
+}
+
+@media screen and (min-width:2500px) and (max-width:2600px) {
+    
+    form div h2{
+       font-size: 3.5em;
+       margin-bottom: 1em;
+    }
+
+    form input{
+        height: 4em;
+    }
+
+    .username-field{
+        margin-bottom: 3em;
+    }
+
+    .username-field label{
+        font-size: 1.5em;
+        margin-left: 5em;
+    }
+
+    form .btnStyle button{
+        letter-spacing: 3px;
+        font-size: 2em;
+    }
+
+    form .btnStyle{
+        margin-top: 6em;
+    }
+
+    form .message{
+        margin-top: 4em;
+    }
+
+    form .message h6{
+        font-size: 1.6em;
+    }
+
+    .errorPopup .head{
+        height: 4em;
+    }
+
+    .errorPopup .head h5{
+        margin-left: 8em;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .errorPopup .head a{
+        font-size: 1.4em;
+    }
+
+    .error-message p{
+        font-size: 1.5em;
+        padding: 1em;
+    }
+
+    .errorPopup .button{
+        margin-left: 14em;
+        font-size: 1.5em;
+    }
+
+}
+
+@media screen and (min-width:1020px) and (max-width:1030px){
+    form div h2{
+        font-size: 1.5em;
+        margin-bottom: 1em;
+     }
+
+     form .message h6{
+        font-size: .8em;
+    }
+
+    .errorPopup .head h5{
+        font-size: 1em;
+    }
+
+    .errorPopup .head a{
+        font-size: .8em;
+    }
+
+    .error-message p{
+        font-size: .8em;
+        padding: .3em;
+    }
+
+    .errorPopup .button{
+        margin-top: -1em;
+        font-size: .7em;
+    }
+}
+
+@media screen and (min-width:760px) and (max-width:780px){
+    
+    section nav a img{
+        width: 12%;
+        height: 8%; 
+    }
+    
+    .logindiv{
+        width: 50%;
+        margin-left: -4em;
+    }
+
+    form .message h6{
+        font-size: .7em;
+        font-weight: 700;
+        color: rgb(124, 31, 31);
+    }
+
+    .errorPopup{
+        width: 50%;
+        height: 30%;
+        position: absolute;
+        top: 10%;
+        left: 20%;
+    }
+
+    .errorPopup .button{
+        margin-left: 9.5em;
+    }
+}
+
+@media screen and (min-width:420px) and (max-width:450px){
+    section nav a img{
+        width: 20%;
+        height: 7%; 
+    }
+
+    .imagestyle img{
+        display: none;
+    }
+
+    .logindiv{
+        margin-left: -10.5em;
+        width: 80%;
+    }
+
+    form input[type='text']:focus + label[for="username"]{
+        margin-top: -3.2em;
+        background: #34447A;
+        padding: 0em .3em;
+        font-weight: 500;
+        color: white;
+        transition: .4s;
+    }
+
+    form input[type='password']:focus + label[for="password"]{
+        margin-top: -3.2em;
+        background: #344378;
+        padding: 0em .3em;
+        font-weight: 500;
+        color: white; 
+    }
+
+    form .message h6{
+        font-size: .7em;
+        color: rgb(186, 15, 15);
+        font-weight: 700;
+    }
+
+    .inputLabel{
+        margin-top: -3.2em;
+        background: #344378;
+    }
+
+    .errorPopup{
+        width: 80%;
+        height: 25%;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+    }
+
+    .errorPopup .head h5{
+        margin-left: 7em;
+        font-size: 1em;
+        margin-top: .5em;
+    }
+
+    .errorPopup p{
+        font-size: .9em;
+    }
+
+    .errorPopup .button{
+        margin-top: 0em;
+        font-size: .8em;
+    }
+}
+
+@media screen and (min-width:370px) and (max-width:390px){
+    section nav a img{
+        width: 21%;
+        height: 6%; 
+    }
+
+    .imagestyle img{
+        display: none;
+    }
+
+    .logindiv{
+        margin-left: -9.5em;
+        width: 80%;
+    }
+
+    form label{
+        margin-top: -2.4em;
+        margin-left: 3.5em;
+        font-size: .8em;
+    }
+
+    form input[type='text']:focus + label[for="username"]{
+        margin-top: -3.7em;
+        background: #34447B;
+    }
+
+    form input[type='password']:focus + label[for="password"]{
+        margin-top: -3.7em;
+        background: #334070;
+    }
+
+    .inputLabel{
+        margin-top: -3.7em;
+        background: #34447B;
+    }
+
+    form .message h6{
+        font-size: .7em;
+        color: rgb(186, 15, 15);
+        font-weight: 700;
+    }
+
+    .errorPopup{
+        width: 80%;
+        height: 25%;
+        position: absolute;
+        top: 10%;
+        left: 9%;
+    }
+
+    .errorPopup .head h5{
+        margin-left: 6em;
+        font-size: 1em;
+        margin-top: .5em;
+    }
+
+    .errorPopup p{
+        font-size: .8em;
+    }
+
+    .errorPopup .button{
+        margin-left: 9em;
+        margin-top: -1em;
+        font-size: .8em;
+    } 
+
+}
+
+@media screen and (min-width:310px) and (max-width:330px){
+    section nav a img{
+        width: 22%;
+        height: 6%; 
+    }
+
+    .imagestyle img{
+        display: none;
+    }
+
+    .logindiv{
+        margin-top: -1em;
+        margin-left: -8em;
+        width: 80%;
+    }
+
+    .logindiv div h2{
+        font-size: 1.3em;
+    }
+
+    form label{
+        margin-top: -2.4em;
+        margin-left: 3.5em;
+        font-size: .8em;
+    }
+
+    form input[type='text']:focus + label[for="username"]{
+        margin-top: -3.8em;
+        background: #384A8C;
+    }
+
+    form input[type='password']:focus + label[for="password"]{
+        margin-top: -3.8em;
+        background: #334070;
+    }
+
+    .inputLabel{
+        margin-top: -3.8em;
+        background: #35457D;
+    }
+
+    form .message h6{
+        font-size: .7em;
+        color: rgb(186, 15, 15);
+        font-weight: 700;
+    }
+
+    .errorPopup{
+        width: 80%;
+        height: 25%;
+        position: absolute;
+        top: 10%;
+        left: 8%;
+    }
+
+    .errorPopup .head h5{
+        margin-left: 5em;
+        font-size: 1em;
+        margin-top: .5em;
+    }
+
+    .errorPopup p{
+        font-size: .7em;
+    }
+
+    .errorPopup .button{
+        margin-left: 7.5em;
+        margin-top: -1em;
+        font-size: .8em;
+    }
+
+}
+
+
+
+
+
+
+

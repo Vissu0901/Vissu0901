@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/table.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+<section>
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    
+    {% if title == 'librarian details' %}
+
+    <h3 class="table-head">Librarians Available</h3>
+    <table class="table table-striped">            
+    <thead>
+        
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Librarian Name</th>
+            <th scope="col">Librarian Email</th>
+            <th scope="col">Shift</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for librarian in librarians %}
+
+        <tr>
+          <th scope="row">{{ librarian.id }}</th>
+          <td>{{ librarian.librarian_name }}</td>
+          <td>{{ librarian.librarian_email }}</td>
+
+        {% if librarian.librarian_shift == 'morning' %}
+            <td>6AM to 2PM (Morning)</td>
+        {% elif librarian.librarian_shift == 'afternoon' %}
+            <td>2PM to 11PM (Afternoon)</td>
+        {% else %}
+            <td>No shift selected</td>
+        {% endif %}
+        </tr>
+      
+    {% endfor %}
+</tbody>
+</table>  
+{% elif title == 'student books' %}
+
+<table class="table table-striped">            
+    <thead>
+        <div class="student-mg-filter">
+            <h3 class="table-head" style="margin-top: -2em;">Book Collections:</h3>
+            <form action="" method="get" style="margin-left: 2em;">
+                
+                <select name="book-name" class="form-select" style="width: 15em; float: left; margin-left: 10em;">
+                    <option value="none">Book Name</option>
+                    {% for book_name in book_names %}
+                    <option value="{{ book_name }}">{{ book_name }}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="borrow-date" class="form-select" style="width: 15em; float: left;">
+                    <option value="none">Librarian Email</option>
+                    {% for librarian_email in librarian_emails %}
+                    <option value="{{ librarian_email }}">{{ librarian_email }}</option>
+                    {% endfor %}
+                </select>
+    
+                <select name="librarian-shift" class="form-select" style="width: 15em; float: left;">
+                    <option value="none">Librarian Shift</option>
+                    {% for shift in librarian_shifts %}
+                    <option value="{{ shift }}">{{ shift|title }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-success btn-search">Search</button>
+            </form>
+        </div>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return Date</th>
+            <th scope="col">Librarian Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Return</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for info in details %}
+    
+            <tr>
+              <th scope="row">{{ info.id }}</th>
+            <td>
+                <form action="{% url 'student-task-status' %}" method="post" id="form-{{ info.id }}" style="cursor: pointer;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ info.id }}" name="taskid">
+                    <a class="dropdown-item book-item" onclick="document.getElementById('form-{{ info.id }}').submit();">{{ info.book_name|title }}</a> 
+                </form>
+            </td>
+
+              <td>{{ info.approved_date }}</td>
+
+            {% if info.approved_date == info.return_date and info.status != 'return accepted' %}
+                <td>------------</td>
+            {% else %}
+                <td>{{ info.return_date }}</td>
+            {% endif %}
+              
+              <td>{{ info.librarian_email }}</td>
+
+            {% if info.status == 'requested' %}
+                <td style="color: rgb(183, 183, 37);">{{ info.status|title }}</td>
+            {% elif info.status == 'approved' %}
+                <td style="color: rgb(44, 142, 62);">{{ info.status|title }}</td>
+            {% elif info.status == 'return request' %}
+                <td style="color: rgb(183, 183, 37);">{{ info.status|title }}</td>
+            {% elif info.status == 'return accepted' %}
+                <td style="color: rgb(39, 142, 39);">{{ info.status|title }}</td>
+            {% elif info.status == 'rejected' %}
+                <td style="color: rgb(157, 37, 37);">{{ info.status|title }}</td>
+            {% else %}
+                <td>No Status</td>
+            {% endif %}
+
+            {% if info.status == 'approved' %}
+            <td>
+                <form action="{% url 'student-return-book' %}" method="post" id="return-{{ info.id }}" style="cursor: pointer;">
+                    {% csrf_token %}
+                    <input type="hidden" name="returnid" value="{{ info.id }}">
+                    <input type="hidden" name="studentemail" value="{{ info.student_email }}">
+                    <button type="submit" class="delete-table">Return</button>
+                 </form>
+            </td>
+            {% else %}
+            <td>------------</td>
+            {% endif %}
+            </tr>
+          
+        {% endfor %}
+    </tbody>
+    </table> 
+
+{% endif %} 
+</section>
+
+{% endblock %}

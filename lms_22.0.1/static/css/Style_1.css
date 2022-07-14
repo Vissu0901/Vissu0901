@@ -1,0 +1,282 @@
+
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-bar{
+    background: linear-gradient(to right,#000046, #1CB5E0, #000046);
+    width: 100%;
+    height: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    position: fixed;
+    border-bottom: 2px solid rgb(35, 8, 99);
+    z-index: 2;
+
+    /*effects*/
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-name: landingPageNavBar;
+}
+
+@keyframes landingPageNavBar {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+.nav-bar .logo{
+    width: 50%;
+}
+
+
+.nav-bar img{
+    width: 11%;
+    height: 6%;
+    margin-left: 2%;
+}
+
+.header img{
+    width: 12%;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.account{
+    float: right;
+    text-decoration: none;
+    color: white;
+    margin-top: 0.2%;
+    padding-top: 0.4%;
+    padding-bottom: 0.4%;
+    padding-left: 0.6%;
+    padding-right: 0.6%;
+    border-radius: 5px;
+    font-weight: 800;
+}
+
+.main{
+
+    background: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)), url('/static/images/landing_page.png');
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.main h1{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 60px;
+    color: white ;
+    font-family: 'Water Brush', cursive;
+    letter-spacing: 3px;
+    display: block;
+    text-shadow: 2px 2px white;
+
+    /* effects */
+    background-color: #fdf8f8;
+    background-image: linear-gradient(
+        45deg,
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+        background-size: 100%;
+        background-repeat: repeat;
+        -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  animation: rainbow-text-simple-animation-rev 2s ease forwards ;
+}
+
+@keyframes rainbow-text-simple-animation-rev {
+    0% {
+        transform: translateY(-300%); 
+    }
+    25% {  
+    }
+    50% {
+        background-size: 650%;
+        letter-spacing: 0px;
+    }
+    75% {
+        background-size: 100%;
+        letter-spacing: 10px;
+    }
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+.main p{
+    position: absolute;
+    top: 45%;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: 3%;
+    letter-spacing: 1px;
+
+    /*effects*/
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-name: landingPageParagh;
+
+}
+
+@keyframes landingPageParagh {
+    0% {
+      transform: translateY(200%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: .5em;
+    font-size: .9em;
+    border: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-right: 1em;
+    transition: .2s;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: .5em .5em;
+    text-decoration: none;
+    display: block;
+    transition: .2s;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    border-bottom: 4px solid orange;
+    border-radius: 5px;
+}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+    transition: .5s;
+}
+
+.dropbtn:hover{
+    color: orange;
+    transition: .2s;
+}
+
+.btn-group button{
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.btn-group button:hover{
+    background-color: white;
+}
+
+.student_login form{
+    width: 35%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 3%;
+    border-radius: 5px;
+    background-color: rgb(12, 39, 95);
+}
+
+
+
+.student_login form h3{
+    color: white;
+}
+
+.student_login form h1, input, small{
+    text-align: left;
+    margin-bottom: 4%;
+    letter-spacing: 1px;
+}
+
+.student_login form input, small{
+    margin-top: 4%;
+}
+
+.student_login form button{
+    margin-top: 3%;
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+span{
+    color: red;
+    font-size: 15px;
+}
+
+.link{
+    font-size: 15px;
+}
+
+.link:hover{
+    color: red;
+}
+
+.main_header{
+    width: 100%;
+    height: 100vh;
+    background-color:white;
+}
+
+.student_login form select{
+    text-align: left;
+    margin-top: 3%;
+}
+
+.main-header{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(116, 167, 243, 0.4);
+}

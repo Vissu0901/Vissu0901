@@ -1,0 +1,16 @@
+
+marquee{
+    color: red !important;
+    margin-bottom: 1em !important;
+    letter-spacing: 1px !important;
+    font-weight: bold;
+}
+
+.update_student{
+    border: 0ch;
+    color: white;
+    background-color: rgb(28, 130, 28);
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: .3em .5em;
+}

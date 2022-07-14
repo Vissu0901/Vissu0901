@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/form.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+{% if title == "management login" %}
+<section style="height: 100%;">
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <div class="messages" id="error_class">
+        <span id="error">{{ message }}</span>
+    </div>
+    <form action="login" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <p>If you forget credentials, Please reach out to <br> your Database Admin..</p>
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+</section>
+{% elif title == 'add new book' %}
+<section >
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <a href="" class="back_home">Back to home</a>
+    <div class="messages" id="error_class">
+        <span id="error">{{ msg }}</span>
+    </div>
+
+    <form action="add-book" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</section>
+{% else %}
+<section >
+
+</section>
+
+{% endif %}
+
+{% if title == "management login" %}
+<script>
+
+    window.onload = function loadInputClass(){
+
+        // for login form 
+
+        let adminUsername = document.getElementById('id_username')
+        adminUsername.classList.add('form-control')
+
+        let adminPassword = document.getElementById('id_password')
+        adminPassword.classList.add('form-control')
+
+        // error handling
+        let error_class = document.getElementById('error_class')
+        let error = document.getElementById('error').innerText
+        if(error=='Enter valid credentials' || error=='Account locked, Please contact DB admin'){
+            error_class.classList.add('error_invalid')
+        }
+    }
+</script>
+
+{% else %}
+<script>
+    window.onload = function loadStyle(){
+
+        // for add new book form
+
+        // error handling
+        let error_class = document.getElementById('error_class')
+        let error = document.getElementById('error').innerText
+        if(error=='Successfully added new book'){
+            error_class.classList.add('error_success')
+        } else if(error=='Book name already exists'){
+            error_class.classList.add('error_invalid')
+        }
+
+        // input styles
+        let bookTitle = document.getElementById('id_title')
+        bookTitle.classList.add('form-control')
+        bookTitle.innerHTML=""
+
+        let bookAuthor = document.getElementById('id_author')
+        bookAuthor.classList.add('form-control')
+        bookAuthor.innerHTML=""
+
+        let bookCategory = document.getElementById('id_category')
+        bookCategory.classList.add('form-select')
+
+        let bookDescription = document.getElementById('id_description')
+        bookDescription.classList.add('form-control')
+        bookDescription.innerHTML=""
+
+        let bookCount = document.getElementById('id_available_count')
+        bookCount.classList.add('form-control')
+        bookCount.innerHTML=""
+
+    }
+</script>
+{% endif %}
+
+{% endblock %}

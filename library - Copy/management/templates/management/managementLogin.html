@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+<link rel="stylesheet" href="{% static 'management/managementLogin.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <section>
+        <nav>
+            <div>
+                <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="icon"></a>
+            </div>
+        </nav>
+        <div class="loginpage">
+            <div class="imagestyle">
+                <img src="{% static 'management/loginpage.png' %}" alt="login image">
+            </div>
+            <div class="logindiv">
+                <form action="{% url 'management-home' %}" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <h2>Management Login</h2>
+                    </div>
+                    <div class="input-fields">
+                        {% for form in forms %}
+                        <div class="username-field">
+                            {{ form }}
+                            {{ form.label_tag }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="btnStyle">
+                        <button type="submit" class="btn btn-success">Login</button>
+                    </div>
+                    <div style="color: rgb(104, 22, 22);" class="message">
+                        <h6>If you forget Username or Password, Please reach out DB Admin.</h6>
+                    </div>
+                    <div>
+                        <input type="hidden" value="" id="modeHandle">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Error message box-->
+        
+       <!--<div class="errorHandling">
+            <div class="errorPopup" id="close1">
+                <div class="head">
+                    <h5>Error Occured</h5>
+                    <a href="javascript:" onclick="closePopup()">X</a>
+                </div>
+                <div class="error-message">
+                    <p id>{{ msg }}...</p>
+                </div>
+                <div>
+                    <a href="javascript:" class="btn btn-success button" onclick="closePopup()">Close</a>
+                </div>
+            </div>
+        </div>-->
+
+        <!-- Button trigger modal -->
+    <button type="button" style="display: none;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="btn-popup">
+        Launch static backdrop modal
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade errorHandling" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Error Occured:</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="navToLoginPage()"></button>
+            </div>
+            <div class="modal-body">
+            {{msg}}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="navToLoginPage()">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+
+        
+    </section>
+
+<script>
+    // management details
+    let username = document.getElementById('id_username')
+    let password = document.getElementById('id_password')
+
+    // librarian details
+    let librarian_email = document.getElementById('id_librarian_email')
+    let librarian_password = document.getElementById('id_librarian_password')
+
+    // add form-control class to inputs in form
+    window.onload = function LoadingStyles(){
+        username.classList.add('form-control')
+        password.classList.add('form-control')
+
+        // loading error message
+        if('{{msg}}'=='none'){
+           //document.querySelector('.errorPopup').style.transform='scale(.1)'
+           //document.querySelector('.errorPopup').style.visibility='hidden'
+        } else{
+            //document.querySelector('.errorPopup').style.transform='scale(1)'
+           //document.querySelector('.errorPopup').style.visibility='visible'
+           document.querySelector('#btn-popup').click()
+        }
+        
+        //mode effect
+        if('{{mode}}'=='Light Mode'){
+            document.body.classList.add('lightMode')
+            document.querySelector('h2').style.color='black'
+            document.querySelector('img[alt="icon"]').src = "../static/images/ineuron-logo.png"
+            document.querySelector('label[for="id_username"]').style.background='#E5E4FC'
+            document.querySelector('label[for="id_username"]').style.color='black'
+            document.querySelector('label[for="id_password"]').style.background='#E5E4FC'
+            document.querySelector('label[for="id_password"]').style.color='black'
+        } else if('{{mode}}'=='Dark Mode'){
+            document.body.classList.remove('lightMode')
+            document.querySelector('h2').style.color='white'
+            document.querySelector('img[alt="icon"]').src = "../static/images/ineuron-logo-white.png"
+            document.querySelector('label[for="id_username"]').style.background='#394D91'
+            document.querySelector('label[for="id_username"]').style.color='white'
+            document.querySelector('label[for="id_password"]').style.background='#394D91'
+            document.querySelector('label[for="id_password"]').style.color='white'
+        }
+        
+    }
+
+    function closePopup(){
+        document.querySelector('.errorPopup').style.transform='scale(.1)'
+        document.querySelector('.errorPopup').style.visibility='hidden'
+    }
+
+    function navToLoginPage(){
+        location.href='/management/'
+    }
+
+    // for focus effect to username and password
+
+    //while mouseout of element for username
+
+    username.onmouseout = ()=> {
+        inputTextStyle()
+    }
+
+    // while keypressed of element for username
+    username.onkeypress = ()=> {
+       inputTextStyle()
+    }
+
+    // while onmouseout of element for password
+    password.onmouseout = ()=> {
+        inputTextStyle()
+    }
+
+    // while onkeypress of element for password
+    password.onkeypress = ()=> {
+        inputTextStyle()
+    }
+
+
+    function inputTextStyle(){
+
+        if(username.value.length>0){
+            let labelStyle = document.querySelector('label[for="id_username"]')
+            labelStyle.classList.add('inputLabel')
+        } else{
+            let labelStyle = document.querySelector('label[for="id_username"]')
+            labelStyle.classList.remove('inputLabel')
+        }
+
+        if(password.value.length>0){
+            let labelStyle = document.querySelector('label[for="id_password"]')
+            labelStyle.classList.add('inputLabel')
+        } else{
+            let labelStyle = document.querySelector('label[for="id_password"]')
+            labelStyle.classList.remove('inputLabel')
+        }
+    }
+
+</script>
+
+{% endblock %}

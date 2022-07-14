@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/details.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <section>
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>        
+
+        {% if title == 'book details' %}
+        <div class="details">
+            <h1>Book Information</h1>
+            <h4><b><u>Book ID:</u></b> &nbsp; {{ book.id }}</h4>
+            <h4><b><u>Book Name:</u></b> &nbsp; {{ book.title|title }}</h4>
+            <h4><b><u>Book Author:</u></b> &nbsp; {{ book.author }}</h4>
+
+            {% if book.category == 'bachelor-of-arts' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Arts</h4>
+            {% elif book.category == 'bba/bms' %}
+                <h4><b><u>Category:</u></b> &nbsp; BBA/BMS</h4>
+            {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Engg./Tech</h4>
+            {% elif book.category == 'bachelor-of-commerce' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Commerce</h4>
+            {% elif book.category == 'intermediate' %}
+                <h4><b><u>Category:</u></b> &nbsp; Intermediate</h4>
+            {% elif book.category == 'bachelor-of-law' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Law</h4>
+            {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Medicine</h4>
+            {% elif book.category == 'bachelor-of-science' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Science</h4>
+            {% elif book.category == 'ssc-10th-standard' %}
+                <h4><b><u>Category:</u></b> &nbsp; 10th Standard</h4>
+            {% else %}
+                <h4><b><u>Category:</u></b> &nbsp; No category selected</h4>
+            {% endif %}
+
+            <h4><b><u>Description:</u></b> &nbsp; <p>{{ book.description }}</p></h4>
+            <h4><b><u>Book registration date:</u></b> &nbsp; {{ book.upload_date }}</h4>
+            <h4><b><u>Available Count:</u></b> &nbsp; {{ book.available_count }}</h4>
+        </div> 
+
+    {% elif title == 'borrow book' %}
+    <div class="error_message1">
+        <span>{{ error_message }}</span>
+    </div>
+    <div class="success_message1">
+        <span>{{ success_message }}</span>
+    </div>
+
+    <div class="details">
+        <h1>Preview Book details:</h1>
+        <h4 style="font-weight: bold; color: rgb(23, 138, 48);">Hello {{ student.student_name }}, Please preview your book details...</h4>
+        <h4><b><u>Book ID:</u></b> &nbsp; {{ book.id }}</h4>
+        <h4><b><u>Book Name:</u></b> &nbsp; {{ book.title|title }}</h4>
+        <h4><b><u>Book Author:</u></b> &nbsp; {{ book.author }}</h4>
+        <h4><b><u>Book Description:</u></b> &nbsp; <br> {{ book.description }}</h4>
+        <h4><b><u>Available books:</u></b> &nbsp; {{ book.available_count }}</h4>
+        <form action="{% url 'student-borrow-book' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="bookid" value={{book.id}}>
+            <input type="hidden" name="studentid" value={{student.student_email}}>
+            
+            {% if msg == 'remove' %}
+                
+            {% else %}
+            <select name="librarianid" id="librarianid" class="form-select">
+                <option value=0>Select Librarian</option>
+                {% for librarian in librarians %}
+                    <option value={{librarian.librarian_email}}>{{librarian.librarian_name}}</option>
+                {% endfor %}
+            </select><br>
+            <button type="submit">Borrow</button>
+            {% endif %}
+        </form>
+    </div>
+    {% elif title == 'book status' %}
+    <div class="details">
+        <h1>Request Status information:</h1>
+        <h4 style="font-weight: bold; color: rgb(23, 138, 48);">Hello {{ student.student_name }}, Please check your request status...</h4>
+        <h4><b><u>ID:</u></b> &nbsp; {{ task.id }}</h4>
+        <h4><b><u>Librarian Email:</u></b> &nbsp; {{ task.librarian_email }}</h4>
+        <h4><b><u>Requested Date:</u></b> &nbsp; {{ task.requested_date }}</h4>
+
+        {% if task.requested_date == task.return_date and task.status != 'return accepted' %}
+            <h4><b><u>Approved Date:</u></b> &nbsp; ----------</h4>
+            <h4><b><u>Return Date:</u></b> &nbsp; -----------</h4>
+        {% else %}
+            <h4><b><u>Approved Date:</u></b> &nbsp; {{ task.approved_date }}</h4>
+            <h4><b><u>Return Date:</u></b> &nbsp; {{ task.return_date }}</h4>
+        {% endif %}
+
+        {% if task.status == 'requested' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(156, 146, 31);">{{ task.status|title }}</b></h4>
+            <h4>Your request not approved by <b>{{ task.librarian_email }}</b> its still in request status...</h4>
+        {% elif task.status == 'approved' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(19, 119, 33);">{{ task.status|title }}</b></h4>
+            <h4>Your request approved by <b>{{ task.librarian_email }}</b>, Please find return date above...</h4>
+        {% elif task.status == 'return request' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(158, 147, 29);">{{ task.status|title }}</b></h4>
+            <h4>Your return request not approved by <b>{{ task.librarian_email }}</b>, Please try to reach librarian asap. Else you will be blocked...</h4>
+        {% elif task.status == 'return accepted' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(36, 133, 33);">{{ task.status|title }}</b></h4>
+            <h4>Thanks for returning book on time...</h4>
+        {% elif task.status == 'rejected' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(156, 60, 36);">{{ task.status|title }}</b></h4>
+            <h4>Your request for book has been rejected by <b>{{ task.librarian_email }}</b>...</h4>
+        {% else %}
+            <h4><b><u>Status:</u></b> &nbsp; <b>{{ task.status|title }}</b></h4>
+            <h4>No status</h4>
+        {% endif %}
+        
+    </div>
+    {% endif %}
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/tableM.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    <!-- nav bar starts here -->
+
+    <div class="navbar">
+        <div class="imageIcon">
+            <a href="{% url 'landing-page' %}">
+                <img src="{% static 'images/ineuron-logo-white.png' %}" alt="Ineuron logo">
+            </a>
+        </div>
+        <div class="backToHomeBtn">
+            <form action="{% url 'm-back-to-home' %}" id="back_to_home_table" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ user.username }}" name="username_table">
+                <a href="javascript:" class="btn btn-light" onclick="backToHome()">Home</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- nav bar ends here -->
+
+    {% if title == 'librarian details' %}
+    <!-- details name starts here -->
+
+    <div class="detailsName">
+        <h2>Librarian details</h2>
+    </div>
+
+    <!-- details name ends here -->
+
+    <!-- filtering work starts here -->
+
+    <div class="librarian_filtering">
+        <form action="search-librarians" method="get">
+            <input type="hidden" name="m_table_username" value="{{user.username}}">
+            <select name="librarian-name" class="form-select">
+                <option value="none">Librarian Name</option>
+                    {% for librarian_name in librarian_names %}
+                    <option value="{{ librarian_name }}">{{ librarian_name }}</option>
+                    {% endfor %}
+            </select>
+            <select name="librarian-email" class="form-select">
+                <option value="none">Librarian Email</option>
+                    {% for librarian_email in librarian_emails %}
+                    <option value="{{ librarian_email }}">{{ librarian_email }}</option>
+                    {% endfor %}
+            </select>
+            <select name="librarian-shift" class="form-select">
+                <option value="none">Librarian Shift</option>
+                    {% for shift in librarian_shifts %}
+                    <option value="{{ shift }}">{{ shift|title }}</option>
+                    {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+
+    <!-- filtering work ends here -->
+    
+    <!-- table work starts here -->
+
+    <div class="tableStyle">
+        <table class="table">
+
+            <thead>
+                <tr>
+                  
+                <th scope="col">ID</th>
+                <th scope="col">Librarian Name</th>
+                <th scope="col">Librarian Email</th> 
+                <th scope="col">Shift</th>
+                </tr>
+              </thead>
+            <tbody>
+              {% for info in details %}
+              <tr>
+                <th scope="row">{{ info.id }}</th>
+                <td><a href="{% url 'librarian-wise-details' info.id %}" target="_blank">{{ info.librarian_name|title }}</a></td>
+                <td>{{ info.librarian_email }}</td>
+
+                {% if info.librarian_shift == 'morning' %}
+                <td>6AM to 2PM (Morning)</td>
+                {% elif info.librarian_shift == 'afternoon' %}
+                <td>2PM to 11PM (Afternoon)</td>
+                {% else %}
+                <td>No shift selected</td>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    
+    </div>
+    
+    <!-- table work ends here -->
+
+    {% elif title == 'student details' %}
+
+    <div class="detailsName">
+        <h2>Student details</h2>
+    </div>
+
+    <!-- details name ends here -->
+
+    <!-- filtering work starts here -->
+
+    <div class="librarian_filtering">
+        <form action="search-students" method="get">
+            <input type="hidden" name="m_table_username" value="{{user.username}}">
+            <select name="student-name" class="form-select">
+                <option value="none">Student Name</option>
+                    {% for student_name in student_names %}
+                    <option value="{{ student_name }}">{{ student_name }}</option>
+                    {% endfor %}
+            </select>
+            <select name="student-email" class="form-select">
+                <option value="none">Student Email</option>
+                    {% for student_email in student_emails %}
+                    <option value="{{ student_email }}">{{ student_email }}</option>
+                    {% endfor %}
+            </select>
+            <select name="student-category" class="form-select" style="width: 15em; float: left;">
+                    <option value="none">Student Category</option>
+                    {% for student_category in student_categories %}
+
+                    {% if student_category == 'bachelor-of-arts' %}
+                    <option value="{{ student_category }}">Bachelor of Arts</option>
+                    {% elif student_category == 'bba/bms' %}
+                    <option value="{{ student_category }}">BBA/BMS</option>
+                    {% elif student_category == 'btech-bachlor-of-engg./tech' %}
+                    <option value="{{ student_category }}">Bachelor of Engg./Tech</option>
+                    {% elif student_category == 'bachelor-of-commerce' %}
+                    <option value="{{ student_category }}">Bachelor of Commerce</option>
+                    {% elif student_category == 'intermediate' %}
+                    <option value="{{ student_category }}">Intermediate</option>
+                    {% elif student_category == 'bachelor-of-law' %}
+                    <option value="{{ student_category }}">Bachelor of Law</option>
+                    {% elif student_category == 'mbbs-bachelor-of-medicine' %}
+                    <option value="{{ student_category }}">Bachelor of Medicine</option>
+                    {% elif student_category == 'bachelor-of-science' %}
+                    <option value="{{ student_category }}">Bachelor of Science</option>
+                    {% elif student_category == 'ssc-10th-standard' %}
+                    <option value="{{ student_category }}">10th standard</option>
+                    {% else %}
+                    <option value="{{ student_category }}">No category selected</option>
+                    {% endif %}
+
+                    {% endfor %}
+                </select>
+                <select name="student-books-count" class="form-select" style="width: 10em; float: left;">
+                    <option value="none">Books Count</option>
+                    {% for count in student_books_count %}
+                    <option value="{{ count }}">{{ count }}</option>
+                    {% endfor %}
+                </select>
+                <select name="student-status" class="form-select" style="width: 10em; float: left;">
+                    <option value="none">Status</option>
+                    {% for i in student_status %}
+
+                    {% if i == 'unblock' %}
+                    <option value="{{ i }}">Active</option>
+                    {% elif i == 'block' %}
+                    <option value="{{ i }}">Blocked</option>
+                    {% else %}
+                    <option value="0">None</option>
+                    {% endif %}
+
+                    {% endfor %}
+                </select>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+
+    <!-- filtering work ends here -->
+
+    <!-- table work starts here -->
+
+    <div class="tableStyle">
+        <table class="table">
+            <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Student Email</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Books Count</th>
+                  <th scope="col">Fine Amount</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for info in details %}
+
+        <tr>
+          <th scope="row">{{ info.id }}</th>
+          <td><a href="{% url 'student-wise-details' info.id %}" target="_blank">{{ info.student_name|title }}</a></td>
+          <td>{{ info.student_email }}</td>
+        {% if info.student_category == 'bachelor-of-arts' %}
+            <td>Bachelor of Arts</td>
+        {% elif info.student_category == 'bba/bms' %}
+            <td>BBA/BMS</td>
+        {% elif info.student_category == 'btech-bachlor-of-engg./tech' %}
+            <td>Bachelor of Engg./Tech</td>
+        {% elif info.student_category == 'bachelor-of-commerce' %}
+            <td>Bachelor of Commerce</td>
+        {% elif info.student_category == 'intermediate' %}
+            <td>Intermediate</td>
+        {% elif info.student_category == 'bachelor-of-law' %}
+            <td>Bachelor of Law</td>
+        {% elif info.student_category == 'mbbs-bachelor-of-medicine' %}
+            <td>Bachelor of Medicine</td>
+        {% elif info.student_category == 'bachelor-of-science' %}
+            <td>Bachelor of Science</td>
+        {% elif info.student_category == 'ssc-10th-standard' %}
+            <td>10th standard</td>
+        {% else %}
+            <td>No category selected</td>
+        {% endif %}
+        <td style="text-align: center;">{{ info.student_books_count }}</td>
+
+        <td style="text-align: center;">Rs.{{ info.fine_amount }}</td>
+        </tr>
+
+    {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+
+    <!-- table work ends here -->
+
+    {% endif %}
+
+
+
+<script>
+
+    // back to home starts here
+
+    function backToHome(){
+        let backToHomeBtn = document.querySelector('#back_to_home_table')
+        backToHomeBtn.submit()
+    }
+
+    function mChangeTableMode(mode){
+        if(mode=='Light Mode'){
+            document.body.style.background = 'linear-gradient(140deg, #BEC4FE , #FFF7FA)'
+            document.querySelector('.btn').classList.remove('btn-light')
+            document.querySelector('.btn').classList.add('btn-primary')
+            document.querySelector('img[alt="Ineuron logo"]').src = '../static/images/ineuron-logo.png'
+            document.querySelector('h2').style.color = 'black'
+            document.querySelector('thead').style.color = 'black'
+            document.querySelector('table').style.border = '2px solid black'
+        }
+    }
+
+    window.onload = ()=>{
+        mChangeTableMode('{{user.mode}}')
+    }
+
+    
+
+    // back to home ends here
+</script>
+{% endblock %}

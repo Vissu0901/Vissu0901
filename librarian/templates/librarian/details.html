@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/details.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <section>
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+
+        {% if title == 'book details' %}
+
+        <div class="details">
+            <h1>Book Information</h1>
+            <h4><b><u>Book ID:</u></b> &nbsp; {{ book.id }}</h4>
+            <h4><b><u>Book Name:</u></b> &nbsp; {{ book.title|title }}</h4>
+            <h4><b><u>Book Author:</u></b> &nbsp; {{ book.author }}</h4>
+            {% if book.category == 'bachelor-of-arts' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Arts</h4>
+            {% elif book.category == 'bba/bms' %}
+                <h4><b><u>Category:</u></b> &nbsp; BBA/BMS</h4>
+            {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Engg./Tech</h4>
+            {% elif book.category == 'bachelor-of-commerce' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Commerce</h4>
+            {% elif book.category == 'intermediate' %}
+                <h4><b><u>Category:</u></b> &nbsp; Intermediate</h4>
+            {% elif book.category == 'bachelor-of-law' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Law</h4>
+            {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Medicine</h4>
+            {% elif book.category == 'bachelor-of-science' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Science</h4>
+            {% elif book.category == 'ssc-10th-standard' %}
+                <h4><b><u>Category:</u></b> &nbsp; 10th Standard</h4>
+            {% else %}
+                <h4><b><u>Category:</u></b> &nbsp; No category selected</h4>
+            {% endif %}
+            <h4><b><u>Description:</u></b> &nbsp; <p>{{ book.description }}</p></h4>
+            <h4><b><u>Book registration date:</u></b> &nbsp; {{ book.upload_date }}</h4>
+            <h4><b><u>Available Count:</u></b> &nbsp; {{ book.available_count }}</h4>
+        </div>  
+        
+        {% elif title == 'librarian task' %}
+
+        <div class="details">
+            <h1>Task Information</h1>
+            <h4><b style="color: green;">Hello {{ librarian.librarian_name }}, Please find below task details...</b></h4>
+            <h4><b><u>ID:</u></b> &nbsp; {{ task.id }}</h4>
+            <h4><b><u>Student Name:</u></b> &nbsp; {{ student.student_name|title }}</h4>
+            <h4><b><u>Student Email:</u></b> &nbsp; {{ student.student_email }}</h4>
+            <h4><b><u>Book Name:</u></b> &nbsp; {{ task.book_name }}</h4>
+            <h4><b><u>Student available books:</u></b> &nbsp; {{ student.student_books_count }}</h4>
+            <h4><b><u>Book available:</u></b> &nbsp; {{ book.available_count }}</h4>
+
+            {% if task.status == 'requested' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: rgb(169, 169, 39);">{{ task.status|title }}</b></h4>
+            {% elif task.status == 'approved' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: rgb(17, 138, 36);">{{ task.status|title }}</b></h4>
+            {% elif task.status == 'return request' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: rgb(169, 169, 39);">{{ task.status|title }}</b></h4>
+            {% elif task.status == 'return accepted' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: rgb(33, 133, 43);">{{ task.status|title }}</b></h4>
+            {% elif task.status == 'rejected' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: rgb(169, 39, 39);">{{ task.status|title }}</b></h4>
+            {% else %}
+            <h4><b><u>Status:</u></b> &nbsp;<b>No status</b></h4>
+            {% endif %}
+
+            <h4><b><u>Request Date:</u></b> &nbsp; {{ task.requested_date }}</h4>
+
+            {% if task.requested_date == task.return_date %}
+                <h4><b><u>Return Date:</u></b> &nbsp; ----------</h4>
+            {% else %}
+                <h4><b><u>Return Date:</u></b> &nbsp; {{ task.return_date }}</h4>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+section img{
+    width: 10em;
+    height: 4em;
+    margin: 2em;
+}
+
+section form{
+    width: 30em;
+    height: auto;
+    margin: auto;
+    margin-top: -2%;
+    padding-bottom: 4em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color: rgb(12, 39, 95);
+    border-radius: 1em;
+}
+
+section form h2{
+    text-align: center;
+    padding: .5em 0em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+    border-bottom: 2px solid orange;
+}
+
+section form input{
+    width: 10em;
+    margin-left: 4em;
+    margin-bottom: 1em;
+}
+
+section form a{
+    float: left;
+    margin-left: 4em;
+    margin-top: 1em;
+}
+
+section form a:hover{
+    color: red;
+}
+
+.form-control {
+    min-width: 0;
+    width: 22em !important;
+    margin-left: 4em !important;
+}
+
+.form-select{
+    min-width: 0;
+    width: 22em !important;
+    margin-left: 4em;
+}
+
+section form label{
+    font-size: 1.2em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: .3em;
+    margin-left: 4em;
+    color: rgb(247, 247, 245);
+}
+
+form button, p{
+    margin-bottom: 1%;
+    margin-left: 14%;
+    margin-top: 1%;
+}
+
+form button{
+    width: 30%;
+    margin-top: 1em;
+}
+
+form p{
+    color: rgb(242, 67, 67);
+    font-weight: 800;
+}
+
+section{
+    height: auto;
+    padding-bottom: 2em;
+    background-color: rgba(72, 115, 202, .5);
+}
+
+.messages{
+    width: 37%;
+    height: 4.5%;
+    margin:auto;
+    text-align: center;
+    margin-bottom: 4%;
+    margin-top: -3%;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.messages span{
+    padding-top: 4px;
+}
+
+.error_invalid{
+    background-color: rgb(236, 152, 152);
+    color: rgb(140, 9, 9);
+}
+
+.error_success{
+    background-color: rgba(120, 245, 141, 0.5);
+    color: rgb(7, 67, 8) !important;
+}
+
+section .back_home{
+    float: right;
+    margin: 2em;
+    text-decoration: None;
+    color: white;
+    background: linear-gradient(to right, rgb(89, 89, 169),rgb(51, 51, 125),rgb(25, 25, 94),rgb(51, 51, 125),rgb(89, 89, 169));
+    text-align: center;
+    padding: .5em 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+section .back_home:hover{
+    background: rgb(25, 25, 109);
+    color: white;
+}
+
+
+
+

@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,400;1,300;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;1,200;1,300;1,400&family=Water+Brush&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Noto Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.page1{
+    background: linear-gradient(140deg,#49BCF6, #49DEB2 );
+    height: 100vh;
+    width: 100%;
+    padding-top: 2%;
+}
+
+.page1 nav a img{
+    float: left;
+    width: 10%;
+    height: 8%;
+    margin-left: 1%;
+}
+
+.page1 nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.page1 nav ul li{
+    font-size: 110%;
+}
+
+.page1 nav ul li a{
+    text-decoration: none;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px #49DEB2;
+    padding-bottom: .5em;
+    padding-right: .5em;
+    padding-left: .5em;
+    margin-right: 4em;
+    position: relative;
+}
+
+.page1 nav ul li a:after{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 3.1px;
+    width: 0%;
+    left: 0;
+    bottom: -2px;
+    transition: .4s;
+}
+
+.page1 nav ul li a:hover:after{
+    width: 100%;
+    transition: .4s;
+}
+
+.page1 .main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+.page1 .main div {
+    width: 50%;
+    height: auto;
+  }
+
+ .page1 .main div img{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35%;
+    position: absolute;
+    top: 35%;
+    filter: drop-shadow(10px 10px 5px #398ab3); 
+}
+
+.page1 .main div h1{
+    margin-top: 18%;
+    margin-left: -5%;
+    color: #17455c;
+    letter-spacing: 3px;
+    font-size: 210%;
+}
+
+.page1 div p{
+    margin-top: 5%;
+    margin-left: -5%;
+    margin-right: 2%;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.page1 .main div a{
+    margin-left: -3%;
+    position: absolute;
+    margin-top: 3%;
+    text-decoration: none;
+    color: white;
+    padding: .4em 1em;
+    border-radius: 20px;
+    border: 2px solid white;
+    background: -webkit-linear-gradient(180deg, transparent 100%, white);
+    transition: .3s;
+}
+
+.page1 .main div a:hover{
+    animation-name: getStartedBtn;
+    animation-duration: .25s;
+    
+    background: -webkit-linear-gradient(180deg, transparent -500%, white);
+    color: #398ab3;
+}
+
+@keyframes getStartedBtn{
+    0%{
+        background: -webkit-linear-gradient(180deg, transparent 75%, white);
+    }
+    25%{
+        background: -webkit-linear-gradient(180deg, transparent 25%, white);
+    }
+    50%{
+        background: -webkit-linear-gradient(180deg, transparent 0%, white);
+    }
+    75%{
+        background: -webkit-linear-gradient(180deg, transparent -75%, white);
+    }
+    100%{
+        background: -webkit-linear-gradient(180deg, transparent -120%, white);
+    }
+}
+
+.page2{
+    background:linear-gradient(140deg, #86E3CE , #CCABD8) ;
+    padding-bottom: 2%;
+}
+
+.page2 h1{
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.page2 .main {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.page2 .main .paragh{
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin-bottom: 5%;
+}
+
+.paragh div{
+    width: 60%;
+    margin: auto;
+}
+
+.page2 h1{
+    font-size: 250%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    letter-spacing: 2px;
+    color: #17455c;
+}
+
+.page2 .main .paragh img{
+    width: 18%;
+    height: auto;
+    filter: drop-shadow(10px 10px 1px #5bb49f); 
+}
+
+.paragh div h3{
+    text-align: left;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 1%;
+}
+
+.paragh div p{
+    text-align: left;
+}
+
+.up-arrow{
+    width: 100%; 
+    display:flex; 
+    justify-content:center;
+}
+
+.up-arrow a{
+    color: #2b7765;
+    text-decoration: none;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bolder;
+    padding: .3em .8em; 
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    transition: .4s;
+}
+
+.up-arrow a:hover{
+    color: white;
+    background-color: transparent;
+    transition: .4s;
+    box-shadow: none;
+}
+
+@media screen and (min-width:2560px) {
+
+    .page1 nav ul li{
+        font-size: 220%;
+    }
+
+    .page1 .main div h1{
+        font-size: 60px;
+    }
+
+    .page1 .main div a{
+        font-size: 20px;
+        padding: 1em 3em;
+        border-radius: 50px;
+        letter-spacing: 1px;
+    }
+
+    .page1 div p{
+       font-size: 25px;
+    }
+
+    .page2 h1{
+        font-size: 60px;
+    }
+
+    .paragh div h3{
+       font-size: 40px;
+    }
+
+    .paragh div p{
+        font-size: 30px;
+    }
+
+    .up-arrow a{
+        font-size: 50px;
+        padding: .3em .8em;
+    }
+}
+
+@media screen and (max-width:1024px){
+    .page1 nav ul li{
+        font-size: 14px;
+    }
+
+    .page1 .main div h1{
+        font-size: 25px;
+    }
+
+    .page1 div p{
+        font-size: 11px;
+     }
+
+     .page1 .main div a{
+        font-size: 10px;
+        padding: .5em .8em;
+        border: 1.5px solid white;
+    }
+
+    .page2 h1{
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .paragh div h3{
+        font-size: 20px;
+     }
+
+     .paragh div p{
+        font-size: 12px;
+    }
+
+    .up-arrow a{
+        font-size: 15px;
+        padding: .3em .8em;
+    }
+
+}
+
+@media screen and (max-width:440px) {
+
+    .page1 nav a img{
+        float: left;
+        width: 55px;
+        height: 20px;
+        margin-left: 10px;
+    }
+
+    .page1 nav ul li{
+        font-size: 12px;
+    }
+
+    .page1 nav ul li a{
+        letter-spacing: 1px;
+        padding-bottom: .5em;
+        padding-right: .5em;
+        padding-left: .5em;
+        margin-right: 10px;
+        position: relative;
+    }
+
+    .page2 h1{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .page2 .main .paragh img{
+        width: 80px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width:330px) {
+    .page1 nav ul li{
+        font-size: 10px;
+    }
+
+    .page1 nav ul li a{
+        letter-spacing: 1px;
+        padding-bottom: .5em;
+        padding-right: .5em;
+        padding-left: .5em;
+        margin-right: 5px;
+        position: relative;
+    }
+
+    .page1 .main div h1{
+        font-size: 18px;
+    }
+}

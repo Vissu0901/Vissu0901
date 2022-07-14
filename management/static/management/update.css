@@ -1,0 +1,30 @@
+body{
+    width: 100%;
+    height: auto;
+    background: linear-gradient(rgb(231, 238, 252),rgb(227, 235, 250)) !important;
+    padding-bottom: 0em;
+}
+
+section .back_home{
+    float: right;
+    margin: 2em;
+    text-decoration: None;
+    color: white;
+    background: linear-gradient(to right, rgb(89, 89, 169),rgb(51, 51, 125),rgb(25, 25, 94),rgb(51, 51, 125),rgb(89, 89, 169));
+    text-align: center;
+    padding: .5em 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+section .back_home:hover{
+    background: rgb(25, 25, 109);
+    color: white;
+}
+
+section img{
+    width: 10em;
+    height: 4em;
+    margin: 2em;
+}

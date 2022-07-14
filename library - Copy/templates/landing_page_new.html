@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+    {% block page_title %} Library Management System {% endblock %}
+
+{% block body_content %}
+
+    <section class="page1">
+        <nav>
+            <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="ineuron log"></a>
+            <ul>
+                <li><a href="{% url 'student-login' %}">Student</a></li>
+                <li><a href="{% url 'librarian-login' %}">Librarian</a></li>
+                <li><a href="{% url 'management-login' %}">Management</a></li>
+            </ul>
+        </nav>
+        <div class="main">
+                <div>
+                    <img src="{% static 'images/book3.png' %}" alt="book">
+                </div>
+                <div>
+                    <h1>Library Management System</h1>
+                    <p>
+                        A library is a collection of materials, books or media that are accessible for use and 
+                        not just for display purposes. A library provides physical (hard copies) or digital access
+                         (soft copies) materials, and may be a physical location or a virtual space, or both.
+                    </p>
+                    <a href="javascript:" onclick="knowMoreBtn()">Know More</a>
+                    
+                </div>
+              </div>  
+        </div>
+    </section>
+    <section class="page2">
+        <h1>Additional Information</h1>
+        <div class="main">
+
+            <div class="paragh">
+                <img src="{% static 'images/students2.png' %}" alt="students">
+                <div>
+                    <p>
+                        <h3>Students</h3>
+                        Student can create account or login into application using Home Navigation. Student can
+                        borrow only 3 books once and need to get approval from any Librarian. Book need
+                        to return with in 15 days, otherwise Rs.10 fine collected for one day from return
+                        date. If Student fails to return Book within 15days of 5 consective failure leads
+                        to defaulter(account will be blocked for next 1.5 months).
+                    </p>
+                </div>
+            </div>
+    
+            <div class="paragh">
+                <img src="{% static 'images/librarian1.png' %}" alt="librarins">
+                <div>
+                    <h3>Librarians</h3>
+                <p>
+                    Librarian can login into application or new account using Job Code provided by Management
+                    for registration. Librarian need to check his/her pending tasks and make necessary
+                    action on Student Request. Please check Task details before you approve/reject. Please try
+                    to complete pending tasks asap before EOD.   
+                </p>
+                </div>
+            </div>
+            <div class="paragh" style="height: 120%;">
+                <img src="{% static 'images/management5.png' %}" alt="Management">
+                <div>
+                    <h3>Management</h3>
+                <p>
+                    Management team can login into application, have access to add, update and remove book
+                    details. Management can check Student and Librarian details.
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="up-arrow">
+            <a href="javascript:" onclick="backToHome()">&#8593;</a>
+        </div>  
+    </section>
+    <script>
+        function knowMoreBtn(){
+            document.querySelector('.page2').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function backToHome(){
+            document.querySelector('.page1').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+{% endblock %}

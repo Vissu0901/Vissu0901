@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+      Student Home
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/home.css' %}">
+    <link rel="stylesheet" href="{% static 'student/home.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <section class="nav-bar">
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="ineuron logo"></a>
+
+        <form action="{% url 'search' student.id %}" method="post">
+            {% csrf_token %}
+            <select name="select_search" id="select_search" class="form-select">
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+            </select>
+            <input type="text" name="search_input" class="search form-control" placeholder="Search for books here">
+            <input type="submit" class="search-btn btn btn-success" value="Search">
+        </form>    
+        <div class="btn-group account">
+          <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </button>
+          <div class="dropdown-menu">
+            <form action="{% url 'student-update-navigation' %}" method="post" id="form-id" target="_blank" style="cursor: pointer;">
+              {% csrf_token %}
+              <input type="hidden" value="{{ student.student_email }}" name="email">
+              <a class="dropdown-item" onclick="document.getElementById('form-id').submit();">Edit profile</a> 
+            </form>
+            <a class="dropdown-item" href="{% url 'student-logout' %}">Logout</a>
+          </div>
+        </div>
+        <div class="btn-group account">
+            <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Books
+            </button>
+            <div class="dropdown-menu">
+
+              <form action="{% url 'student-collections' %}" method="post" id="collections" target="_blank" style="cursor: pointer;">
+                {% csrf_token %}
+                <input type="hidden" value="{{ student.student_email }}" name="email1">
+                <a class="dropdown-item" onclick="document.getElementById('collections').submit();">Your Collections</a> 
+              </form>
+                <a class="dropdown-item" href="{% url 'student-librarian-details' %}" target="_blank">Librarians</a>
+            </div>
+          </div>
+          </div>
+    </section>
+    <section class="bodycontent">
+        <div class="wishes">
+          <h3>Hello {{ student.student_name }}, Good {{ wishes }}...</h3>
+        </div>
+        <marquee>You are allowed to borrow only {{ student.student_books_count }} books for now...</marquee>
+        
+        {% if book_names != None and diff_names != None %}
+
+          <marquee>You have to return  book in  days...</marquee>
+
+        {% endif %}
+        
+        <div class="books">
+
+            {% for book in books %}
+            <a href="{% url 'student-book-details' book.id %}" target="_blank">
+              <div class="book">
+                {% if book.category == "bachelor-of-arts" %}
+                <img src="{% static 'images/arts.png' %}" alt="{{ book.category }}">
+                {% elif book.category == "bba/bms" %}
+                <img src="{% static 'images/bba.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                <img src="{% static 'images/btech.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'bachelor-of-commerce' %}            
+                <img src="{% static 'images/commerce.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'intermediate' %}
+                <img src="{% static 'images/inter.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'bachelor-of-law' %}
+                <img src="{% static 'images/law.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <img src="{% static 'images/mbbs.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'bachelor-of-science' %}
+                <img src="{% static 'images/science.png' %}" alt="{{ book.category }}">
+                {% elif book.category == 'ssc' %}
+                <img src="{% static 'images/ssc.png' %}" alt="{{ book.category }}">
+                {% else %}
+                <img src="{% static 'images/landing_page.png' %}" alt="{{ book.category }}">
+                {% endif %}
+                <span><u>ID:</u> &nbsp; {{ book.id|title }}</span><br>
+                <span><u>Title:</u> &nbsp; {{ book.title|title }} </span><br>
+                <span><u>Author</u> &nbsp; {{ book.author|title }}</span><br>
+                {% if book.category == 'bachelor-of-arts' %}
+                <span><u>Category:</u> &nbsp; Bachelor of Arts</span><br>
+                {% elif book.category == 'bba/bms' %}
+                <span><u>Category:</u> &nbsp; BBA/BMS</span><br>
+                {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                <span><u>Category:</u> &nbsp; Bachelor of Engg.</span><br>
+                {% elif book.category == 'bachelor-of-commerce' %}
+                <span><u>Category:</u> &nbsp; Bachelor of Comm.</span><br>
+                {% elif book.category == 'intermediate' %}
+                <span><u>Category:</u> &nbsp; Intermediate</span><br>
+                {% elif book.category == 'bachelor-of-law' %}
+                <span><u>Category:</u> &nbsp; Bachelor of Law</span><br>
+                {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <span><u>Category:</u> &nbsp; Bach. of Medicine.</span><br>
+                {% elif book.category == 'bachelor-of-science' %}
+                <span><u>Category:</u> &nbsp; Bach. of Science.</span><br>
+                {% elif book.category == 'ssc-10th-standard' %}
+                <span><u>Category:</u> &nbsp; 10th Standard</span><br>
+                {% else %}
+                <span><u>Category:</u> &nbsp; No category selected</span><br>
+                {% endif %}
+    
+                <span><u>Available books:</u> &nbsp; {{ book.available_count|title }}</span><br>
+                <span><u>Upload date:</u> &nbsp; {{ book.upload_date|title }}</span><br><br>
+                
+                {% if student.student_books_count == 0 %}
+
+                {% elif student.student_books_count == '0' %}
+
+                {% else %}
+                <form action="{% url 'preview-book' %}" method="post" target="_blank">
+                  {% csrf_token %}
+                      <input type="hidden" name="student" value={{student.id}}>
+                      <input type="hidden" name="bookname" value={{book.id}}>
+                      <button type="submit" class="update_student">Borrow</button>
+                  </form>
+                {% endif %}
+
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+    
+    </section>
+    
+    {% endblock %}

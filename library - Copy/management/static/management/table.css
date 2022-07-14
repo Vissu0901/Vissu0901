@@ -1,0 +1,168 @@
+body{
+    width: 100%;
+    height: auto;
+    background: linear-gradient(rgb(231, 238, 252),rgb(227, 235, 250)) !important;
+    padding-bottom: 0em;
+}
+
+section img{
+    width: 10em;
+    height: 4em;
+    margin: 2em;
+}
+
+section .back_home{
+    float: right;
+    margin: 2em;
+    text-decoration: None;
+    color: white;
+    background: linear-gradient(to right, rgb(89, 89, 169),rgb(51, 51, 125),rgb(25, 25, 94),rgb(51, 51, 125),rgb(89, 89, 169));
+    text-align: center;
+    padding: .5em 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+section .back_home:hover{
+    background: rgb(25, 25, 109);
+    color: white;
+}
+
+section table{
+    width: 90% !important;
+    margin: auto;
+    border: 1px solid black !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+section table thead{
+    background: rgb(15, 15, 95);
+    color: white;
+    letter-spacing: 1px;
+}
+
+section table tbody tr{
+    background: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+section table tbody tr a:hover{
+    color: red;
+}
+
+.table-head{
+    width: 25%;
+    margin: auto;
+    margin-bottom: .9em;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 4px solid orange;
+}
+
+td form button{
+    border: 0ch;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: white;
+    padding: .2em .5em;
+}
+
+.update-table{
+    background-color: rgb(38, 144, 38);
+}
+
+.update-table:hover{
+    background-color: rgb(22, 84, 22);
+}
+
+.delete-table{
+    background-color: rgb(196, 45, 45);
+}
+
+.delete-table:hover{
+    background-color: rgb(106, 26, 26);
+}
+
+.book-item{
+    text-decoration: underline !important; 
+    font-weight:bold !important;
+    color: rgb(35, 35, 234) !important;
+}
+
+.book-item:hover{
+    color: rgb(234, 75, 35) !important;
+}
+
+.filter{
+    float: left !important;
+}
+
+.filter button{
+    font-size: 1.1em!important;
+}
+
+.filter button:hover{
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.filter .tags{
+    color: white !important;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.task-header{
+    width: 14em !important;
+    background-color: transparent !important;
+    color: white !important;
+    border: 0ch !important;
+    font-weight: bold !important;
+    transition: .5s !important;
+    letter-spacing: 1px !important;
+}
+
+.task-header:hover{
+    background-color: white !important;
+    color: rgb(18, 18, 86) !important;
+    transition: .5s !important;
+}
+
+.filter-btn{
+    background-color: #5A20CB;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1.5px;
+    padding: .3em .8em;
+    border: 0ch;
+    border-radius: .2em;
+}
+
+.div-tasks-filter{
+    margin-left: 10em;
+    margin-bottom: 2em;
+}
+
+.filter-select{
+    width: 18em !important;
+    float: left;
+}
+
+.search-design{
+    width: 25em !important; 
+    float: left !important; 
+    margin-left: 5em !important;
+}
+
+.btn-search{
+    letter-spacing: 1px !important;
+    margin-left: 1em;
+}
+
+.student-mg-filter{
+    margin-left: 6em;
+    margin-bottom: 2em;
+}

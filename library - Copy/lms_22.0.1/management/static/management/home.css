@@ -1,0 +1,192 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: auto;
+    padding-bottom: 3em;
+}
+
+.nav-bar img{
+    width: 10%;
+    float: left;
+}
+
+form{
+    margin-top: .5%;
+}
+
+.form-select{
+    width: 10% !important;
+    float: left;
+    margin-left: 9%;
+    background-color: rgb(189, 189, 199) !important;
+    font-weight: bold !important;
+    border-radius: 0% !important;
+}
+
+.form-control{
+    width: 23% !important;
+    float: left;
+    border-radius: 0% !important;
+}
+
+.btn-success{
+    float: left;
+    border-radius: 0% !important;
+}
+
+.bodycontent{
+    width: 100% !important;
+    height: auto !important;
+    background-color: rgb(157, 195, 241);
+    position: absolute;
+    top: 13%;
+    padding-top: 3%;
+    padding-bottom: 5.5%;
+}
+
+.wishes{
+    margin-bottom: 2%;
+}
+
+.wishes h3{
+    margin-left: 2%;
+    font-weight: bold;
+}
+
+.books{
+    width: 90%;
+    margin: auto;
+}
+
+.book{
+    width: 22%;
+    height: 20em;
+    background-color: rgb(245, 249, 249);
+    float: left;
+    margin: 1em;
+    padding: .5em;
+
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    border-right:1px solid #f0f0f0;
+    border-bottom:1px solid #f0f0f0;
+    box-shadow: rgba(50, 50, 93, 0.5) 0px 2px 5px -1px, rgba(0, 0, 0, 0.5) 0px 1px 3px -1px;
+}
+
+.book:hover{
+    -ms-transform: scale(1.1,1.1); /* IE 9 */
+    -webkit-transform: scale(1.1,1.1); /* Safari */
+    transform: scale(1.1,1.1);
+	-webkit-box-shadow: 10px 10px 91px 0px rgb(136, 174, 234);
+    -moz-box-shadow: 10px 10px 91px 0px rgb(136, 174, 234);
+    box-shadow: 10px 10px 91px 0px rgb(136, 174, 234);
+		z-index:9999;
+		border-right:1px solid transparent;
+		border-bottom:1px solid transparent;
+		cursor:pointer;
+		background-color:#fff;
+}
+
+.book img{
+    width: 100% !important;
+    height: 6em;
+    margin-bottom: .2em;
+}
+
+.book span{
+    font-weight: bold;
+    color: black;
+}
+
+.book a{
+    margin-top: 2em;
+    padding: .3em;
+    border: 0ch;
+    color: white;
+    text-decoration: none;
+}
+
+.book .update{
+    background-color: green;
+}
+
+.book .update:hover{
+    background-color: rgb(8, 82, 8); 
+    color: white;
+}
+
+.book .delete{
+    background-color: rgb(160, 11, 11);
+}
+
+.book .delete:hover{
+    background-color: rgb(126, 11, 11);
+    color: white;
+}
+
+.delete_div{
+    
+    width: 20em;
+    height: 10em;
+    background-color: rgb(241, 245, 245);
+    box-shadow: rgba(50, 50, 93, 0.5) 0px 2px 5px -1px, rgba(0, 0, 0, 0.5) 0px 1px 3px -1px;
+    padding: 1em;
+    display: none;
+
+    position:fixed;
+    left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+     transform: translate(-50%,-50%);
+}
+
+.open_delete{
+    display: block;
+}
+
+.delete_div h5{
+    text-align: center;
+    border-bottom: 2px solid grey;
+    letter-spacing: 1px;
+}
+
+.delete_div p{
+    text-align: center;
+}
+
+.delete_div .delete1{
+    border: 0ch;
+    background-color: rgb(169, 28, 28);
+    color: white;
+    padding: .2em .8em;
+    margin-left: 3.5em;
+    text-decoration: none;
+}
+
+.delete_div .delete1:hover{
+    background-color: rgb(197, 44, 44);
+}
+
+.delete_div .cancel1{
+    border: 0ch;
+    background-color: rgb(17, 110, 35);
+    color: white;
+    padding: .2em .8em;
+    margin-left: 1em;
+    text-decoration: none;
+}
+
+.delete_div .cancel1:hover{
+    background-color: rgb(40, 143, 60);
+}
+
+

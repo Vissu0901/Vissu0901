@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/details.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <section>
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+
+
+        <!--{% if title == 'student details' %}
+        <a href="" class="back_home">Back to details</a>
+        {% elif title == 'librarian details' %}
+        <a href="" class="back_home">Back to details</a>
+        {% endif %}-->
+
+        {% if title == 'student details' %}
+
+        <div class="details">
+            <h1>Student Information</h1>
+            <h4><b><u>Student ID:</u></b> &nbsp; {{ student.id }}</h4>
+            <h4><b><u>Student Name:</u></b> &nbsp; {{ student.student_name|title }}</h4>
+            <h4><b><u>Student Email:</u></b> &nbsp; {{ student.student_email }}</h4>
+
+            {% if student.student_category == 'bachelor-of-arts' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Arts</h4>
+            {% elif student.student_category == 'bba/bms' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; BBA/BMS</h4>
+            {% elif student.student_category == 'btech-bachlor-of-engg./tech' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Engg./Tech</h4>
+            {% elif student.student_category == 'bachelor-of-commerce' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Commerce</h4>
+            {% elif student.student_category == 'intermediate' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Intermediate</h4>
+            {% elif student.student_category == 'bachelor-of-law' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Law</h4>
+            {% elif student.student_category == 'mbbs-bachelor-of-medicine' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Medicine</h4>
+            {% elif student.student_category == 'bachelor-of-science' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; Bachelor of Science</h4>
+            {% elif student.student_category == 'ssc-10th-standard' %}
+                <h4><b><u>Student Category:</u></b> &nbsp; 10th-Standard</h4>
+            {% else %}
+                <h4><b><u>Student Category:</u></b> &nbsp; No category selected</h4>
+            {% endif %}
+
+            <h4><b><u>Available Books Count:</u></b> &nbsp; {{ student.student_books_count }}</h4>
+
+            {% if student.student_status == 'unblock' %}
+            <h4><b><u>Status:</u></b> &nbsp;<b style="color: green;">Active</b> </h4>
+            {% elif student.student_status == 'block' %}
+            <h4><b><u>Status:</u></b> &nbsp; <b style="color: rgb(203, 48, 48);">Blocked</b></h4>
+            {% else %}
+            <h4><b><u>Status:</u></b> &nbsp; No status</h4>
+            {% endif %}
+
+            <h4><b><u>Student registration date:</u></b> &nbsp; {{ student.student_registration_date }}</h4>
+            
+        
+       
+       
+        </div>        
+
+        {% elif title == 'librarian details' %}
+
+        <div class="details">
+            <h1>Librarian Information</h1>
+            <h4><b><u>Librarian ID:</u></b> &nbsp; {{ librarian.id }}</h4>
+            <h4><b><u>Librarian Name:</u></b> &nbsp; {{ librarian.librarian_name|title }}</h4>
+            <h4><b><u>Librarian Email:</u></b> &nbsp; {{ librarian.librarian_email }}</h4>
+            
+            {% if librarian.librarian_shift == 'morning' %}
+                <h4><b><u>Librarian Shift:</u></b> &nbsp; 6AM to 2PM (Morning)</h4>
+            {% elif librarian.librarian_shift == 'afternoon' %}
+                <h4><b><u>Librarian Shift:</u></b> &nbsp; 2PM to 11PM (Afternoon)</h4>
+            {% else %}
+                <h4><b><u>Librarian Shift:</u></b> &nbsp; No shift selected</h4>
+            {% endif %}
+            <h4><b><u>Pending actions:</u></b> &nbsp; {{ pending_tasks }}</h4>
+            <h4><b><u>Librarian registration date:</u></b> &nbsp; {{ librarian.librarian_registration_date }}</h4>
+        </div>
+
+
+        {% elif title == 'book details' %}
+
+        <div class="details">
+            <h1>Book Information</h1>
+            <h4><b><u>Book ID:</u></b> &nbsp; {{ book.id }}</h4>
+            <h4><b><u>Book Name:</u></b> &nbsp; {{ book.title|title }}</h4>
+            <h4><b><u>Book Author:</u></b> &nbsp; {{ book.author }}</h4>
+            {% if book.category == 'bachelor-of-arts' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Arts</h4>
+            {% elif book.category == 'bba/bms' %}
+                <h4><b><u>Category:</u></b> &nbsp; BBA/BMS</h4>
+            {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Engg./Tech</h4>
+            {% elif book.category == 'bachelor-of-commerce' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Commerce</h4>
+            {% elif book.category == 'intermediate' %}
+                <h4><b><u>Category:</u></b> &nbsp; Intermediate</h4>
+            {% elif book.category == 'bachelor-of-law' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Law</h4>
+            {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Medicine</h4>
+            {% elif book.category == 'bachelor-of-science' %}
+                <h4><b><u>Category:</u></b> &nbsp; Bachelor of Science</h4>
+            {% elif book.category == 'ssc-10th-standard' %}
+                <h4><b><u>Category:</u></b> &nbsp; 10th Standard</h4>
+            {% else %}
+                <h4><b><u>Category:</u></b> &nbsp; No category selected</h4>
+            {% endif %}
+            <h4><b><u>Description:</u></b> &nbsp; <p>{{ book.description }}</p></h4>
+            <h4><b><u>Book registration date:</u></b> &nbsp; {{ book.upload_date }}</h4>
+            <h4><b><u>Available Count:</u></b> &nbsp; {{ book.available_count }}</h4>
+            <h4><b><u>Location:</u></b> &nbsp; {{ book.location }}</h4>
+        </div>        
+
+        {% endif %}
+
+    </section>
+
+{% endblock %}

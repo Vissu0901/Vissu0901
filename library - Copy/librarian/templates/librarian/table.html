@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/table.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+<section>
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    
+    {% if title == 'tasks' %}
+        
+        <form action="{% url 'librarian-filter' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="librarian-filter" value="{{librarian.librarian_email}}">
+            <button class="back_home" type="submit">Filter</button>
+        </form>
+    {% endif %}
+
+    <table class="table table-striped">
+
+    {% if title == 'tasks' %}
+    <h3 class="table-head">Task details</h3>    
+    <thead>
+
+    <tr>
+        <th scope="col">
+            ID
+        </th>
+        <th scope="col">
+            Book Name
+        </th>
+        <th scope="col">
+            Student Email
+        </th>
+        <th scope="col">
+            Status
+        </th>
+        <th scope="col">
+            Approve/Reject
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% for task in tasks %}
+
+        <tr>
+            <th scope="row">{{ task.id }}</th>
+
+            <td>
+                <form action="{% url 'librarian-task-details' %}" method="post" id="form-{{ task.id }}" style="cursor: pointer;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ task.id }}" name="taskid">
+                    <a class="dropdown-item book-item" onclick="document.getElementById('form-{{ task.id }}').submit();">{{ task.book_name|title }}</a> 
+                </form>
+            </td>
+
+            <td>{{ task.student_email }}</td>
+
+            {% if task.status == 'requested' %}
+            <td style="color: rgb(172, 172, 37);">{{ task.status|title }}</td>
+            {% elif task.status == 'approved' %}
+            <td style="color: rgb(38, 132, 49);">{{ task.status|title }}</td>
+            {% elif task.status == 'return request' %}
+            <td style="color: rgb(172, 172, 37);">{{ task.status|title }}</td>
+            {% elif task.status == 'return accepted' %}
+            <td style="color: rgb(37, 131, 48);">{{ task.status|title }}</td>
+            {% elif task.status == 'rejected' %}
+            <td style="color: rgb(161, 40, 40);">{{ task.status|title }}</td>
+            {% else %}
+            <td>No status</td>
+            {% endif %}
+
+
+            {% if task.status == 'requested' %}
+            <td>
+                <form action="{% url 'librarian-reject-request' %}" method="post" style="float: left; margin-right: 1em;">
+                    {% csrf_token %}
+                    <input type="hidden" name="reject-task" value="{{task.id}}">
+                    <button type="submit" class="delete-table">Reject</button>
+                </form>
+                <form action="{% url 'librarian-approve-request' %}" method="post" style="float: left;">
+                    {% csrf_token %}
+                    <input type="hidden" name="approve-task" value="{{task.id}}">
+                    <input type="hidden" name="librarian-approve" value="{{task.librarian_email}}">
+                    <button type="submit" class="update-table">Approve</button>
+                </form>
+            </td>
+            {% elif task.status == 'return request' %}
+            <td>
+                <form action="{% url 'librarian-return-accept' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="librarian-return-request" value="{{ task.id }}">
+                    <input type="hidden" name="return-librarian" value="{{ task.librarian_email }}">
+                    <button type="submit" class="update-table">Accept</button>
+                </form>
+            </td>
+            {% else %}
+            <td>-----------</td>
+            {% endif %}
+
+        {% endfor %}
+    </tbody>
+
+    {% elif title == 'students information' %}
+    <h3 class="table-head">Student Information</h3>
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Student Email</th>
+            <th scope="col">Student Books Count</th>
+        </tr>
+        </thead>
+    
+        <tbody>
+            {% for student in students %}
+    
+            <tr>
+                <th scope="row">{{ student.id }}</th>
+    
+                <td>{{ student.student_name|title }}</td>
+    
+                <td>{{ student.student_email }}</td>
+                <td>{{ student.student_books_count }}</td>
+                
+            {% endfor %}
+        </tbody>
+
+    {% elif title == 'tasks-filter' %}
+        <div class="div-tasks-filter">
+            <form action="filtering" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="librarian" value="{{ librarian.id }}">
+                <select name="book-name" class="form-select filter-select">
+                    <option value="0">Select Book Name</option>
+                    {% for i in book_names_filter %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select name="student-email" class="form-select filter-select">
+                    <option value="0">Select Student Email</option>
+                    {% for i in student_emails_filter %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <select name="status" class="form-select filter-select">
+                    <option value="0">Select Status</option>
+                    {% for i in status_filter %}
+                    <option value="{{ i }}">{{ i|title }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-success">Search</button>
+            </form>
+        </div>
+        <h3 class="table-head">Task Filter Results:</h3>
+        <thead>
+
+            <tr>
+                <th scope="col">
+                    ID
+                </th>
+                <th scope="col">
+                    Book Name
+                </th>
+                <th scope="col">
+                    Student Email
+                </th>
+                <th scope="col">
+                    Status
+                </th>
+                <th scope="col">
+                    Approve/Reject
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <th scope="row">{{ task.id }}</th>
+                        <td>
+                            <form action="{% url 'librarian-task-details' %}" method="post" id="form-{{ task.id }}" style="cursor: pointer;">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ task.id }}" name="taskid">
+                                <a class="dropdown-item book-item" onclick="document.getElementById('form-{{ task.id }}').submit();">{{ task.book_name|title }}</a> 
+                            </form>
+                        </td>
+                        <td>{{ task.student_email }}</td>
+                        
+                        {% if task.status == 'requested' %}
+                        <td style="color: rgb(172, 172, 37);">{{ task.status|title }}</td>
+                        {% elif task.status == 'approved' %}
+                        <td style="color: rgb(38, 132, 49);">{{ task.status|title }}</td>
+                        {% elif task.status == 'return request' %}
+                        <td style="color: rgb(172, 172, 37);">{{ task.status|title }}</td>
+                        {% elif task.status == 'return accepted' %}
+                        <td style="color: rgb(37, 131, 48);">{{ task.status|title }}</td>
+                        {% elif task.status == 'rejected' %}
+                        <td style="color: rgb(161, 40, 40);">{{ task.status|title }}</td>
+                        {% else %}
+                        <td>No status</td>
+                        {% endif %}
+
+                        {% if task.status == 'requested' %}
+            <td>
+                <form action="{% url 'librarian-reject-request' %}" method="post" style="float: left; margin-right: 1em;">
+                    {% csrf_token %}
+                    <input type="hidden" name="reject-task" value="{{task.id}}">
+                    <button type="submit" class="delete-table">Reject</button>
+                </form>
+                <form action="{% url 'librarian-approve-request' %}" method="post" style="float: left;">
+                    {% csrf_token %}
+                    <input type="hidden" name="approve-task" value="{{task.id}}">
+                    <input type="hidden" name="librarian-approve" value="{{task.librarian_email}}">
+                    <button type="submit" class="update-table">Approve</button>
+                </form>
+            </td>
+            {% elif task.status == 'return request' %}
+            <td>
+                <form action="{% url 'librarian-return-accept' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="librarian-return-request" value="{{ task.id }}">
+                    <input type="hidden" name="return-librarian" value="{{ task.librarian_email }}">
+                    <button type="submit" class="update-table">Accept</button>
+                </form>
+            </td>
+            {% else %}
+            <td>-----------</td>
+            {% endif %}
+
+            </tr>
+        {% endfor %}
+    </tbody>
+            
+    {% endif %}
+</table>   
+</section>
+
+
+<!-- tasks filter for librarian-->
+
+<script>
+    
+</script>
+
+<!-- end of code -->
+
+{% endblock %}

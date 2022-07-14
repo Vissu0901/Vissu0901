@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'librarian/form.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+{% if title == 'librarian login' %}
+<section style="height: 100%;">
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <div class="messages" id="error_class">
+        <span id="error">{{ message }}</span>
+    </div>
+    <form action="home" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Login</button><br>
+        <a href="{% url 'librarian-registration' %}">No account, click here to register..</a>
+    </form>
+</section>
+{% elif title == 'librarian registration' %}
+<section style="height: 150%;">
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <div class="messages" id="error_class">
+        <span id="error">{{ message }}</span>
+    </div>
+
+    <form action="register" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Register</button><br>
+        <a href="{% url 'librarian-login' %}">Already have an account, click here to login..</a>
+    </form>
+</section>
+{% else %}
+<section >
+
+</section>
+
+{% endif %}
+
+<script>
+
+    window.onload = function loadInputStyles() {
+
+        let librarianEmail = document.getElementById('id_librarian_email')
+        let librarianPassword = document.getElementById('id_librarian_password')
+        let librarianName = document.getElementById('id_librarian_name')
+        let librarianCode = document.getElementById('id_librarian_security_code')
+        let librarianShift = document.getElementById('id_librarian_shift')
+
+        librarianEmail.classList.add('form-control')
+        librarianPassword.classList.add('form-control')
+        librarianName.classList.add('form-control')
+        librarianCode.classList.add('form-control')
+        librarianShift.classList.add('form-control')
+    }
+
+
+</script>
+
+{% endblock %}

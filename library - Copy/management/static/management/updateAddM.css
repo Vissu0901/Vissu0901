@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,400;1,300;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;1,200;1,300;1,400&family=Water+Brush&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(140deg,#1E2A78 , #49BCF6);
+}
+
+body nav{
+    width: 100%;
+    max-height: 3em;
+}
+
+nav a img{
+    max-width: 8em;
+    max-height: 3em;
+    margin: 1em;
+}
+
+.heading{
+    width: 100%;
+    height: fit-content;
+}
+
+.heading h2{
+    text-align: center;
+    color: white;
+    margin: 1em;
+}
+
+.content{
+    width: 93%;
+    height:100%;
+    padding: 2em;
+    margin: auto;
+}
+
+.content .inputStyle{
+    max-width: 95%;
+    height: 8em;
+    padding: .5em;
+    float: left;
+    margin: 1em;
+}
+
+.inputStyle input, select, textarea{
+    max-width: 18em;
+    background-color: transparent !important;
+}
+
+.inputStyle label{
+    padding: .2em;
+    padding-bottom: .4em;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.message{
+    width: 98%;
+    position: absolute;
+    top: 10%;
+    margin: auto;
+    display: none;
+}
+
+.messages{
+    width:fit-content;
+    height: fit-content;
+    background-color: white;
+    margin: auto;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+   
+}
+
+.messages div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

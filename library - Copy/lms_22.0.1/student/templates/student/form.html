@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'student/form.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+{% if title == "student registration" %}
+<section style="height: 130%;">
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <div class="messages">
+        {% if message == "Successfully created account, login here" %}
+            <span style="background-color: rgba(120, 245, 141, 0.5); color: rgb(7, 67, 8);">{{ message }}</span>
+        {% endif %}
+
+        <span id="error">{{ message }}</span>
+    </div>
+    <form action="registration" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Register</button><br>
+        <a href="{% url 'student-login' %}">Already have an account, click here to login</a>
+    </form>
+</section>
+{% elif title == 'student login' %}
+<section style="height:100% ;">
+    <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+    <div class="messages" id="error_class">
+        <span id="error">{{ message }}</span>
+    </div>
+
+    <form action="home" method="post" class="form-group">
+        {% csrf_token %}
+        <h2>{{ title|title }}</h2>
+
+        {% for form in forms %}
+            {{ form.label_tag }}
+            {{ form }}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Login</button>
+        <a href="{% url 'student-registration' %}">No account, click here for new registration</a>
+    </form>
+</section>
+{% else %}
+<section >
+
+</section>
+
+{% endif %}
+
+{% if title == "student registration" %}
+<script>
+
+    window.onload = function loadInputClass(){
+
+        // for login form
+
+        let studentName = document.getElementById('id_student_name')
+        studentName.classList.add('form-control')
+
+        let studentPassword = document.getElementById('id_student_password')
+        studentPassword.classList.add('form-control')
+
+        let studentEmail = document.getElementById('id_student_email')
+        studentEmail.classList.add('form-control')
+
+        let studentCategory = document.getElementById('id_student_category')
+        studentCategory.classList.add('form-select')
+    }
+</script>
+
+{% else %}
+<script>
+    window.onload = function loadStyle(){
+
+        // for add new book form
+
+        let studentPassword = document.getElementById('id_student_password')
+        studentPassword.classList.add('form-control')
+
+        let studentEmail = document.getElementById('id_student_email')
+        studentEmail.classList.add('form-control')
+
+    }
+</script>
+{% endif %}
+
+{% endblock %}

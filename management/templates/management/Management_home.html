@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block page_title %}
+      Management home
+    {% endblock %}
+
+    {% block css_effect %}
+        <link rel="stylesheet" href="{% static 'management/home.css' %}">
+    {% endblock %}
+
+{% block body_content %}
+
+    <section class="nav-bar">
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="ineuron logo"></a>
+
+        <form action="search" method="post">
+            {% csrf_token %}
+            <select name="select_search" id="select_search" class="form-select">
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+              <option value="category">Category</option>
+            </select>
+            <input type="text" name="search_input" class="search form-control" placeholder="Search for books here">
+            <input type="submit" class="search-btn btn btn-success" value="Search">
+        </form>    
+        <div class="btn-group account">
+          <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </button>
+          <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+        </div>
+        <div class="btn-group account">
+            <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Books
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'add-new-book' %}">Add New Book</a>
+            </div>
+          </div>
+          <div class="btn-group account">
+            <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Staff/Student info
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'librarian-details' %}">Librarains list</a>
+                <a class="dropdown-item" href="{% url 'student-details' %}">Students list</a>
+            </div>
+          </div>
+    </section>
+    <section class="bodycontent">
+      <div class="wishes">
+        <h3>Hello Team, Good {{ wishes }}...</h3>
+      </div>
+      <div class="books">
+
+        {% for book in books %}
+        <a href="{% url 'management-book-details' book.id %}">
+          <div class="book">
+            {% if book.category == "bachelor-of-arts" %}
+            <img src="{% static 'images/ba_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == "bba/bms" %}
+            <img src="{% static 'images/bba_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+            <img src="{% static 'images/btech_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'bachelor-of-commerce' %}            
+            <img src="{% static 'images/bcom_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'intermediate' %}
+            <img src="{% static 'images/inter_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'bachelor-of-law' %}
+            <img src="{% static 'images/law_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+            <img src="{% static 'images/mbbs_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'bachelor-of-science' %}
+            <img src="{% static 'images/bsc_new.png' %}" alt="{{ book.category }}">
+            {% elif book.category == 'ssc-10th-standard' %}
+            <img src="{% static 'images/ssc_new.png' %}" alt="{{ book.category }}">
+            {% else %}
+            <img src="{% static 'images/landing_page.png' %}" alt="{{ book.category }}">
+            {% endif %}
+            <span><u>ID:</u> &nbsp; {{ book.id|title }}</span><br>
+            <span><u>Title:</u> &nbsp; {{ book.title|title }} </span><br>
+            <span><u>Author</u> &nbsp; {{ book.author|title }}</span><br>
+            {% if book.category == 'bachelor-of-arts' %}
+            <span><u>Category:</u> &nbsp; Bachelor of Arts</span><br>
+            {% elif book.category == 'bba/bms' %}
+            <span><u>Category:</u> &nbsp; BBA/BMS</span><br>
+            {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+            <span><u>Category:</u> &nbsp; Bachelor of Engg.</span><br>
+            {% elif book.category == 'bachelor-of-commerce' %}
+            <span><u>Category:</u> &nbsp; Bachelor of Comm.</span><br>
+            {% elif book.category == 'intermediate' %}
+            <span><u>Category:</u> &nbsp; Intermediate</span><br>
+            {% elif book.category == 'bachelor-of-law' %}
+            <span><u>Category:</u> &nbsp; Bachelor of Law</span><br>
+            {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+            <span><u>Category:</u> &nbsp; Bach. of Medicine.</span><br>
+            {% elif book.category == 'bachelor-of-science' %}
+            <span><u>Category:</u> &nbsp; Bach. of Science.</span><br>
+            {% elif book.category == 'ssc-10th-standard' %}
+            <span><u>Category:</u> &nbsp; 10th Standard</span><br>
+            {% else %}
+            <span><u>Category:</u> &nbsp; No category selected</span><br>
+            {% endif %}
+
+            <span><u>Available books:</u> &nbsp; {{ book.available_count|title }}</span><br>
+            <span><u>Upload date:</u> &nbsp; {{ book.upload_date|title }}</span><br><br>
+            <a href="{% url 'update-navigation' book.id %}" class="update">Update</a>
+            <a href="{% url 'delete-book' book.id %}" class="delete" id="delete1" onclick="loadMessages()">Delete</a>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
+    </section> 
+    
+  <script>
+
+  let delete1 = document.getElementById('delete1')
+
+  function loadMessages(){
+    alert('Successfully deleted book...')
+  }
+
+  </script>  
+  
+            
+{% endblock %}
+

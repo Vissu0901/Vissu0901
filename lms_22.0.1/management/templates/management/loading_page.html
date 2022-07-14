@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block page_title %}
+      Home
+    {% endblock %}
+
+    {% block body_content %}
+
+    {% if formtype == 'user-login' %}
+    <div>
+        <h3>Loading home page...</h3>
+        <form action="{% url 'home-navigation' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ user.username }}" name="username">
+        </form>
+    </div>
+    {% elif formtype == 'change-mode-home' %}
+    <div>
+        <h3>Loading page...</h3>
+        <form action="{% url 'management-changing-mode' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ user.username }}" name="username">
+            <input type="hidden" value="{{ mode }}" name="mode">
+        </form>
+    </div>
+    {% elif formtype == 'librarian-details' %}
+    <div>
+        <h3>Loading page...</h3>
+        <form action="{% url 'm-librarian-details' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ user.username }}" name="username">
+        </form>
+    </div>
+    {% elif formtype == 'student-details' %}
+    <div>
+        <h3>Loading page...</h3>
+        <form action="{% url 'm-student-details' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{ user.username }}" name="username">
+        </form>
+    </div>
+    {% endif %}
+
+<script>
+    window.onload = ()=>{
+        document.querySelector('form').submit()
+    }
+</script>
+
+    {% endblock %}

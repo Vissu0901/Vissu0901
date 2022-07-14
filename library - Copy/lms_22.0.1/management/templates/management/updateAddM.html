@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/updateAddM.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+    <nav>
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="icon"></a>
+    </nav>
+
+    {% if title == 'update book details' %}
+
+    <div class="heading">
+        <h2>Update Book</h2>
+    </div>
+
+    <form action="{% url 'update-book' book.id %}" method="post">
+        {% csrf_token %}
+        <div class="content">
+        
+            <div class="inputStyle">
+                <label for="bookName">Book Name:</label>
+                <input type="text" id="bookName" name="update_title" value="{{book.title}}" class="form-control">
+            </div>
+            <div class="inputStyle">
+                <label for="bookAuthor">Book Author:</label>
+                <input type="text" id="bookAuthor" name="update_author" value="{{book.author}}" class="form-control">
+            </div>
+            <div class="inputStyle">
+                <label for="bookCategory">Book Category: </label>
+                {% if book.category == 'bachelor-of-arts' %}
+                <label for="bookCategory">Selected: Bachelor of Arts</label><br>
+                {% elif book.category == 'bba/bms' %}
+                <label for="bookCategory">Selected: BBA/BMS</label><br>
+                {% elif book.category == 'btech-bachelor-of-engg./tech' %}
+                <label for="bookCategory">Selected: Bachelor of Engg./Tech</label><br>
+                {% elif book.category == 'bachelor-of-commerce' %}
+                <label for="bookCategory">Selected: Bachelor of Commerce</label><br>
+                {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                <label for="bookCategory">Selected: Bachelor of Medicine</label><br>
+                {% elif book.category == 'bachelor-of-science' %}
+                <label for="bookCategory">Selected: Bachelor of Science</label><br>
+                {% elif book.category == 'intermediate' %}
+                <label for="bookCategory">Selected: Intermediate</label><br>
+                {% elif book.category == 'ssc-10th-standard' %}
+                <label for="bookCategory">Selected: 10th-Standard</label><br>
+                {% elif book.category == 'bachelor-of-law' %}
+                <label for="bookCategory">Selected: Bachelor of Law</label><br>
+                {% else %}
+                <label for="bookCategory">No category selected</label><br>
+                {% endif %}
+
+                <select name="update_category" id="bookCategory" class="form-select">
+                    <option value="0">select option</option>
+                    {% for keys, items in options.items %}
+                    <option value="{{ keys }}">{{ items }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="inputStyle">
+                <label for="bookDescription">Book description:</label>
+                <textarea type="text" name="update_description" id="bookDescription" class="form-control">{{book.description}}</textarea>
+            </div>
+
+            <div class="inputStyle">
+                <label for="bookCount">Books available count:</label>
+                <input type="number" name="update_count" id="bookCount" value="{{ book.available_count }}" class="form-control">
+            </div>
+
+            <div class="inputStyle">
+                <label for="bookLocation">Book Location:</label>
+                <input type="text" name="update_location" id="bookLocation" value="{{ book.location }}" class="form-control">
+            </div>
+
+            <div class="inputStyle" style="margin-top: 3em;">
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </div>  
+    </form>
+    {% elif title == 'add new book' %}
+
+    <div class="heading">
+        <h2>Add New Book</h2>
+    </div>
+
+    <form action="add-book" method="post">
+        {% csrf_token %}
+        <div class="content">
+            {% for form in forms %}
+            <div class="inputStyle">
+                {{ form.label_tag }}
+                {{ form }}
+            </div>
+            {% endfor %}
+            <div class="inputStyle" style="margin-top: 3em;">
+                <button type="submit" class="btn btn-success">Add Book</button>
+            </div>
+        </div>
+    </form>
+    
+    {% endif %}
+
+    
+
+    <div class="message">
+        <div class="messages">
+            <h5>{{message}}</h5>
+            <div>
+                <button class="btn btn-success" onclick="closePopup()">Close</button>
+            </div>
+            
+        </div>
+    </div>
+    
+<script>
+
+    window.onload = ()=>{
+        let msg = document.querySelector('h5').innerText
+        openPopup(msg)
+        loadFormAddStyles()
+    }
+
+    // close popup
+    function closePopup(){
+        document.querySelector('.message').style.display = 'none'
+    }
+
+    // open popup
+    function openPopup(msg){
+        if(msg.length>0){
+            document.querySelector('.message').style.display = 'block'  
+        }
+        else{
+            document.querySelector('.message').style.display = 'none'  
+        }
+    }
+
+    // load form input styles to inputs
+    function loadFormAddStyles(){
+        document.querySelector('#id_title').classList.add('form-control')
+        document.querySelector('#id_author').classList.add('form-control')
+
+        let category = document.querySelector('#id_category')
+        category.classList.add('form-select')
+        category.style.margin = '1.4em'
+
+        let description = document.querySelector('#id_description')
+        description.classList.add('form-control')
+        description.style.height = '5em'
+
+
+        document.querySelector('#id_available_count').classList.add('form-control')
+        document.querySelector('#id_location').classList.add('form-control')
+    }
+
+</script>
+
+{% endblock %}

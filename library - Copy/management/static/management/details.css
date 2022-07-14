@@ -1,0 +1,106 @@
+body{
+    width: 100%;
+    height: auto;
+    background: rgba(160, 160, 255, 0.1) !important;
+    padding-bottom: 2em;
+}
+
+section img{
+    width: 10em;
+    height: 4em;
+    margin: 2em;
+}
+
+section .back_home{
+    float: right;
+    margin: 1em;
+    margin-right: .5em;
+    text-decoration: None;
+    color: white;
+    background: linear-gradient(to right, rgb(89, 89, 169),rgb(51, 51, 125),rgb(25, 25, 94),rgb(51, 51, 125),rgb(89, 89, 169));
+    text-align: center;
+    padding: .5em 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+section .back_home:hover{
+    background: rgb(25, 25, 109);
+    color: white;
+}
+
+section .details{
+    width: 50em;
+    margin: auto;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    overflow-wrap: break-word;
+}
+
+section .details h1{
+    width: 80%;
+    margin: auto;
+    margin-bottom: .8em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid orange;
+}
+
+section .details h4{
+    width: 100% !important;
+    font-size: 1.2em;
+    margin-bottom: .5em;
+    width: 49%;
+}
+
+section .details button{
+    margin-left: 20em;
+    border: 0ch;
+    color: white;
+    background-color: rgb(28, 132, 28);
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: .5em 1em;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+section .details button:hover{
+    background-color: rgb(20, 84, 20);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+section .details select{
+    width: 20em !important;
+    margin: auto !important;
+}
+
+.error_message1{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.error_message1 span{
+    width: 90%;
+    margin-left: 25em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.success_message1{
+    width: 100%;
+    margin-bottom: 1em;
+    color: green;
+}
+
+.success_message1 span{
+    width: 90%;
+    margin-left: 12em;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: rgb(19, 91, 19);
+}
+
+
+
+

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/detailsM.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    
+    <nav>
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="icon"></a>
+    </nav>
+
+    <div class="heading">
+        <h1>{{title|title}}:</h1>
+    </div>
+
+    {% if title == 'librarian details' %}
+
+    <div class="details">
+        <span><b>Librarian ID: &nbsp; </b> {{ librarian.id }}</span><br>
+        <span><b>Librarian Name: &nbsp; </b> {{ librarian.librarian_name|title }}</span><br>
+        <span><b>Librarian Email: &nbsp; </b> {{ librarian.librarian_email }}</span><br>
+        {% if librarian.librarian_shift == 'morning' %}
+            <span><b>Shift: &nbsp; </b> 6AM to 2PM (Morning)</span><br>
+        {% elif librarian.librarian_shift == 'afternoon' %}
+            <span><b>Shift &nbsp; </b> 2PM to 11PM (Afternoon)</span><br>
+        {% else %}
+            <span><b>Shift &nbsp; </b> No shift selected</span><br>
+        {% endif %}
+        <span><b>Pending Tasks &nbsp; </b> {{ pending_tasks }}</span><br>
+        <span><b>Registered Date: &nbsp; </b> {{ librarian.librarian_registration_date }}</span><br>
+    </div>
+
+    {% elif title == 'student details' %}
+
+    <div class="details">
+        <span><b>Student ID: &nbsp; </b> {{ student.id }}</span><br>
+        <span><b>Student Name: &nbsp; </b> {{ student.student_name|title }}</span><br>
+        <span><b>Student Email: &nbsp; </b> {{ student.student_email }}</span><br>
+        
+        {% if student.student_category == 'bachelor-of-arts' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Arts</span><br>
+        {% elif student.student_category == 'bba/bms' %}
+            <span><b>Student Category: &nbsp; </b> BBA/BMS</span><br>
+        {% elif student.student_category == 'btech-bachlor-of-engg./tech' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Engg./Tech</span><br>
+        {% elif student.student_category == 'bachelor-of-commerce' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Commerce</span><br>
+        {% elif student.student_category == 'intermediate' %}
+            <span><b>Student Category: &nbsp; </b>Intermediate</span><br>
+        {% elif student.student_category == 'bachelor-of-law' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Law</span><br>
+        {% elif student.student_category == 'mbbs-bachelor-of-medicine' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Medicine</span><br>
+        {% elif student.student_category == 'bachelor-of-science' %}
+            <span><b>Student Category: &nbsp; </b> Bachelor of Science</span><br>
+        {% elif student.student_category == 'ssc-10th-standard' %}
+            <span><b>Student Category: &nbsp; </b> 10th Standard</span><br>
+        {% else %}
+            <span><b>Student Category: &nbsp; </b> No category selected</span><br>
+        {% endif %}
+
+        <span><b>Availabe Books to Borrow  &nbsp; </b> {{ student.student_books_count }}</span><br>
+        <span><b>Registered Date: &nbsp; </b> {{ student.student_registration_date }}</span><br>
+
+        {% if student.student_status == 'unblock' %}
+            <span><b>Status &nbsp; </b> <b style="color: green;">Active</b></span><br>
+        {% elif student.student_status == 'block' %}
+            <span><b>Status &nbsp; </b> <b style="color: rgb(203, 48, 48);">Blocked</b></span><br>
+        {% else %}
+            <span><b>Status &nbsp; </b> <b style="color: rgb(203, 48, 48);">No Status</b></span><br>
+        {% endif %}
+    </div>
+
+    {% elif title == 'book details' %}
+    <div class="details">
+    <span><b>Book ID: &nbsp; </b> {{ book.id }}</span><br>
+    <span><b>Book Name: &nbsp; </b> {{ book.title|title }}</span><br>
+    <span><b>Author: &nbsp; </b> {{ book.author }}</span><br>
+
+    {% if book.category == 'bachelor-of-arts' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Arts</span><br>
+        {% elif book.category == 'bba/bms' %}
+            <span><b>Category: &nbsp; </b> BBA/BMS</span><br>
+        {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Engg./Tech</span><br>
+        {% elif book.category == 'bachelor-of-commerce' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Commerce</span><br>
+        {% elif book.category == 'intermediate' %}
+            <span><b>Category: &nbsp; </b>Intermediate</span><br>
+        {% elif book.category == 'bachelor-of-law' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Law</span><br>
+        {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Medicine</span><br>
+        {% elif book.category == 'bachelor-of-science' %}
+            <span><b>Category: &nbsp; </b> Bachelor of Science</span><br>
+        {% elif book.category == 'ssc-10th-standard' %}
+            <span><b>Category: &nbsp; </b> 10th Standard</span><br>
+        {% else %}
+            <span><b>Category: &nbsp; </b> No category selected</span><br>
+        {% endif %}
+
+        <span><b>Description: &nbsp; </b> {{ book.description }}</span><br>
+        <span><b>Uploaded Date: &nbsp; </b> {{ book.upload_date }}</span><br>
+        <span><b>No.of books available: &nbsp; </b> {{ book.available_count }}</span><br>
+        <span><b>Location: &nbsp; </b> {{ book.location }}</span><br>
+        </div>  
+    {% endif %}
+    
+{% endblock %}

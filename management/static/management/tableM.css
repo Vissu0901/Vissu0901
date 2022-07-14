@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,400;1,300;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;1,200;1,300;1,400&family=Water+Brush&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+/* dark mode starts here */
+
+body{
+    background: linear-gradient(140deg, #1E2A78 , #49BCF6);
+}
+
+.navbar{
+    width: 100%;
+    max-height: 20em;
+    margin-top: 1%;
+}
+
+.imageIcon{
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+.imageIcon a img{
+    width: 20%;
+    height: max-content;
+    margin-left: 4%;
+}
+
+.backToHomeBtn{
+    width: 30%;
+    margin-right: 2%;
+    float: right;
+}
+
+.backToHomeBtn a{
+    float: right;
+    text-align: center;
+    box-shadow:rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.backToHomeBtn a:hover{
+    box-shadow: none;
+}
+
+.detailsName{
+    width: 100%;
+    max-height: 10em;
+}
+
+.detailsName h2{
+    text-align: center;
+    letter-spacing: 1.5px;
+    margin-top: 2%;
+    color: white;
+}
+
+.librarian_filtering{
+    width: 100%;
+    max-height: 10em;
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.librarian_filtering form{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.librarian_filtering form .form-select{
+    width: auto;
+    float: left;
+    border-radius: 0%;
+}
+
+.librarian_filtering form .btn{
+    border-radius: 0%;
+}
+
+.tableStyle{
+    width: 95%;
+    margin: auto;
+    margin-top: 3%;
+}
+
+.tableStyle table{
+    border: 1px solid white;
+}
+
+thead{
+    color: white;
+}
+
+thead tr th{
+    letter-spacing: 1px;
+}
+
+.btn1{
+    border: 0ch;
+    background-color: transparent;
+    color: white;
+    font-weight: bolder;
+}
+
+td a{
+    color: black;
+}
+
+td a:hover{
+    color: rgb(124, 182, 248);
+}
+
+/* dark mode ends here */
+
+/* mobile large starts here */
+@media screen and (max-width:426px) and (min-width:314px) {
+    .librarian_filtering{
+        width: 100%;
+    }
+
+    .librarian_filtering form select{
+        width: 25% !important;
+    }
+}
+/* mobile large ends here */
+
+/* light mode starts here */
+.bodyLight{
+    background: linear-gradient(140deg, #BEC4FE , #FFF7FA);
+}
+/* light mode ends here */

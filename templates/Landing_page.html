@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+    {% block page_title %} Library Management System {% endblock %}
+
+{% block body_content %}
+    <section class="nav-bar">
+        <a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo-white.png' %}" alt="ineuron logo"></a>
+
+        <div class="dropdown" style="float: right;">
+          <button class="dropbtn">Management</button>
+          <div class="dropdown-content">
+            <a href="{% url 'management-login' %}">Login</a>
+          </div>
+        </div>
+
+        <div class="dropdown" style="float: right;">
+          <button class="dropbtn">Librarian</button>
+          <div class="dropdown-content">
+            <a href="{% url 'librarian-login' %}">Login</a>
+            <a href="{% url 'librarian-registration' %}">New Account</a>
+          </div>
+        </div>
+
+        <div class="dropdown" style="float: right;">
+          <button class="dropbtn">Student</button>
+          <div class="dropdown-content">
+            <a href="{% url 'student-login' %}">Login</a>
+            <a href="{% url 'student-registration' %}">New Account</a>
+          </div>
+        </div>
+
+    </section>
+    <section class="main">
+        <h1>Library Management System</h1>
+        <p>A library, which may vary widely in size, may be organized for use and maintained by a
+             public body<br> such as a government; an institution such as a school or museum; a
+             corporation; or a private individual. In addition to <br> providing materials, libraries
+             also provide the services of librarians who are trained and experts at finding, selecting,
+             circulating <br> and organizing information and at interpreting information needs, navigating
+             and analyzing very large <br> amounts of information with a variety of resources.</p>
+    </section>
+
+{% endblock %}

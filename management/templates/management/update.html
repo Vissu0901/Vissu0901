@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+    {{ title|title }}
+{% endblock %}
+
+{% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/form.css' %}">
+{% endblock %}
+
+{% block body_content %}
+
+<section>
+
+<a href="{% url 'landing-page' %}"><img src="{% static 'images/ineuron-logo.png' %}" alt="Ineuron icon"></a>
+<a href="" class="back_home">Back to home</a>
+<div class="messages" id="error_class">
+    <span id="error">{{ message }}</span>
+</div>
+
+{% if title == 'update book details' %}
+
+<form action="{% url 'update-book' book.id %}" method="post">
+    {% csrf_token %}
+    <h2>{{title|title}}</h2>
+    <label for="id_title">Update book name:</label>
+    <input type="text" class="form-control" value="{{ book.title }}" name="title" id="id_title">
+    <label for="id_author">Update book author:</label>
+    <input type="text" class="form-control" value="{{ book.author }}" name="author" id="id_author">
+
+    {% if book.category == 'bachelor-of-arts' %}
+        <label for="id_category" style="color: green;">Selected: Bachelor of Arts</label>
+    {% elif book.category == 'bba/bms' %}
+        <label for="id_category" style="color: green;">Selected: BBA/BMS</label>
+    {% elif book.category == 'btech-bachelor-of-engg./tech' %}
+        <label for="id_category" style="color: green;">Selected: Bachelor of Engg./Tech</label>
+    {% elif book.category == 'bachelor-of-commerce' %}
+        <label for="id_category" style="color: green;">Selected: Bachelor of Commerce</label>
+    {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+        <label for="id_category" style="color: green;">Selected: Bachelor of Medicine</label>
+    {% elif book.category == 'bachelor-of-science' %}
+        <label for="id_category" style="color: green;">Selected: Bachelor of Science</label>
+    {% elif book.category == 'intermediate' %}
+        <label for="id_category" style="color: green;">Selected: Intermediate</label>
+    {% elif book.category == 'ssc-10th-standard' %}
+        <label for="id_category" style="color: green;">Selected: 10th-Standard</label>
+    {% else %}
+        <label for="id_category" style="color: green;">No category selected</label>
+    {% endif %}
+
+    <select name="category" id="id_category" class="form-select">
+        <option value=0>select Category</option>
+        {% for keys, items in options.items %}
+        <option value="{{ keys }}">{{ items }}</option>
+        {% endfor %}
+    </select>
+    <label for="id_description">Update book description:</label>
+    <textarea name="description" class="form-control" id="id_description" cols="30" rows="10">{{ book.description }}</textarea>
+    <label for="id_available_count">Update book available count:</label>
+    <input type="number" class="form-control" value="{{ book.available_count }}" name="available_count" id="id_available_count">
+    <label for="id_location">Location of book:</label>
+    <input type="text" class="form-control" value="{{ book.location }}" name="location" id="id_location">
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
+    
+{% endif %}
+</section>
+
+{% endblock %}

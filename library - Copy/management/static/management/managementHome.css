@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,400;1,300;1,500;1,700&family=Poppins:ital,wght@0,200;0,300;1,200;1,300;1,400&family=Water+Brush&display=swap');
+
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+/* dark mode work starts here */
+body{
+    background: linear-gradient(312deg, #048cc2 , #3704af);
+    margin-right: 0em;
+}
+
+/* navbar work starts here */
+
+.MnavBar{
+    width: 100%;
+    height: 12%;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+    border-bottom: .5px solid rgba(255, 255, 255, .15);
+}
+
+.imgIcon{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgIcon a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 55%;
+}
+
+.imgIcon a img{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.Msearch{
+    position: absolute;
+    top: 0%;
+    margin-left: 20%;
+    margin-top: 1.5%;
+    width: 45%;
+    height: auto;
+}
+
+.Msearch form{
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.Msearch form select{
+    width: 30% !important;
+    border-radius: 0px 0px 0px 12px  !important;
+    background-color: rgb(243, 239, 239);
+    letter-spacing: 1px;
+}
+
+.Msearch form input{
+    width: 100% !important;
+    letter-spacing: 1px;
+    border-radius: 0% !important;
+    background-color: transparent !important;
+    color: white !important;
+    letter-spacing: 1px !important;
+}
+
+.Msearch form button{
+    border-radius: 0px 10px 0px 0px !important; 
+    letter-spacing: 1px;
+    background: linear-gradient(#3F7856 , #7EC384 Gradient);
+}
+
+.accounts{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
+
+.accounts ul{
+    display: flex;
+    color: white;
+}
+
+.accounts ul li{
+    margin: 1.4em;
+    cursor: pointer;
+    list-style: none;
+    letter-spacing: 1px;
+    font-size: 1.05em;
+    transition: .3s;
+    font-weight: 600;
+}
+
+.accounts ul li:hover{
+    color: black;
+    transition: .3s;
+}
+
+.accounts ul li span:hover{
+    border-bottom: 2px solid white;
+}
+
+.dropdown-content, .dropdown-content-profile {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+  }
+
+  .dropdown-content-profile{
+    right: 4%;
+    display: none;
+  }
+
+  .dropdown-content a, .dropdown-content-profile a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 10px;
+  }
+
+  .accounts ul li:hover .dropdown-content {display: block;}
+
+  .accounts ul li:hover .dropdown-content-profile{display: block;}
+
+  .dropdown-content a:hover, .dropdown-content-profile a:hover{
+    background-color: rgb(235, 230, 230);
+  }
+
+  /* navbar work ends here */
+
+  /* wishes work starts here */
+
+  .wishes{
+    width: 90%;
+    height: auto;
+    margin-top: 2%;
+    margin-left: 2%;
+    color: white;
+    letter-spacing: 1px;
+  }
+
+  /* wishes work ends here */
+
+
+  /* books work starts here */
+
+  .booksInfo{
+    width: 100%;
+    height: auto;
+    padding-bottom: 2%;
+    margin-top: 3%;
+  }
+
+  .books{
+    width: 95%;
+    height: 20%;
+    margin: auto;
+    display: table;
+  }
+
+   .books a{
+    color: black;
+    text-decoration: none;
+  }
+
+  .books a:hover{
+    color: black;
+  }
+
+  .book{
+    width: 21%;
+    height: 18em;
+    background-color: white;
+    padding: .5em;
+    float: left;
+    margin: 1em;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .book:hover{
+    box-shadow: none;
+}
+
+  .book1{
+    width: 100%;
+    height: 8em;
+    background-color: white;
+  }
+
+  .book1 img{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .book2{
+    width: 100%;
+    height: auto;
+    margin-top: .5em;
+  }
+
+  .book3{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1em;
+    margin-right:1em;
+  }
+
+  .book3 a{
+    text-decoration:none;
+    color:white;
+  }
+
+  .book3 a:hover{
+    color: white;
+  }
+
+  /* books work ends here */
+
+  /* monitor view work starts here */
+
+  @media screen and (max-width:2570px) and (min-width:1450px) {
+    
+    .book{
+        width: 12%;
+    }
+
+    .wishes h3{
+        font-size: 3em;
+    }
+
+    .accounts ul{
+        margin-top: 1.5em;
+    }
+
+    .accounts ul li span{
+        font-size: 1.5em;
+    }
+
+  }
+
+  /* monitor view work ends here */
+
+  /* 1024px view work starts here */
+
+  @media screen and (max-width:1030px) and (min-width:770px){
+    .book{
+        width: 25%;
+    }
+
+    .wishes h3{
+        font-size: 1.3em;
+    }
+
+    .accounts ul{
+        margin-top: -.5em;
+    }
+
+    .accounts ul li span{
+        font-size: .8em;
+    }
+
+    .Msearch{
+        width: 42%;
+    }
+
+  }
+
+  /* 1024px view work ends here */
+
+  /* tablet view work starts here */
+
+  @media screen and (max-width:770px) and (min-width:430px) {
+    .book{
+        width: 28%;
+    }
+
+    .wishes h3{
+        font-size: 1.2em;
+    }
+
+    .accounts ul li span{
+        font-size: .7em;
+    }
+
+    .Msearch{
+        margin-left: 13%;
+    }
+
+    .Msearch form select, .Msearch form input, .Msearch form button{
+        height: 2em; 
+    }
+
+    .imgIcon{
+        width: 12%;
+    }
+  }
+
+  /* tablet view ends here */
+
+  /* mobile large view starts here */
+
+  @media screen and (max-width:427px) and (min-width:377px) {
+    .book{
+        width: 60%;
+    }
+
+    .wishes h3{
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .Msearch{
+      margin-top: .2em;
+      width: 75%;
+      margin-left: 3.5em;
+    }
+
+    .Msearch form{
+      height: 2em;
+    }
+
+    .accounts{
+      position: absolute;
+      top: 40%;
+      height: 2em;
+    }
+
+    .accounts ul li{
+      margin: .6em;
+      font-size: 1em;
+      height: 2em;
+    }
+
+    .imgIcon{
+      height: 80%;
+    }
+  }
+
+  /* mobile large view ends here */
+
+  /* mobile medium view starts here */
+
+  @media screen and (max-width:377px) and (min-width:322px) {
+    .book{
+        width: 70%;
+      }
+    
+      .wishes h3{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-size: 1em;
+    }
+
+    .Msearch{
+      margin-top: .2em;
+      width: 75%;
+      margin-left: 3.5em;
+    }
+
+    .Msearch form{
+      height: 2em;
+    }
+
+    .accounts{
+      position: absolute;
+      top: 40%;
+      height: 2em;
+    }
+
+    .accounts ul li{
+      margin: .6em;
+      font-size: 1em;
+      height: 2em;
+    }
+
+    .imgIcon{
+      height: 80%;
+    }
+  }
+
+  /* mobile medium view ends here */
+
+  /* mobile small view starts here */
+
+  @media screen and (max-width:322px) and (min-width:300px) {
+    .book{
+        width: 80%;
+      }
+    
+      .wishes h3{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        font-size: 1em;
+    }
+
+    .Msearch{
+      margin-top: .2em;
+      width: 75%;
+      margin-left: 3.5em;
+    }
+
+    .Msearch form{
+      height: 2em;
+    }
+
+    .accounts{
+      position: absolute;
+      top: 40%;
+      height: 2em;
+    }
+
+    .accounts ul li{
+      margin: .6em;
+      font-size: 1em;
+      height: 2em;
+    }
+
+    .imgIcon{
+      height: 60%;
+    }
+  }
+
+  /* mobile small view ends here */
+  
+
+/* dark mode work ends here */
+
+/* light mode work starts here */
+
+.bodyLight{
+  background: linear-gradient(115deg, #BEC4FE , #FFF7FA);
+}
+
+.h3Light{
+  color: black;
+}
+
+.MnavBarLight{
+  background-color: rgb(37, 25, 97);
+}
+
+.bookLight{
+  background-color: rgb(197, 213, 245);
+}
+
+/* light mode work ends here */

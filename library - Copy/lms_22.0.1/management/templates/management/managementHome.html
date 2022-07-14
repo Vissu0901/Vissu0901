@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block page_title %}
+      Management home
+    {% endblock %}
+
+     {% block css_effect %}
+    <link rel="stylesheet" href="{% static 'management/managementHome.css' %}">
+    {% endblock %}
+
+{% block body_content %}
+
+    <!-- nav bar content starts here-->
+    <div class="MnavBar">
+        <nav>
+            <div class="imgIcon">
+                <a href="{% url 'landing-page' %}">
+                    <img src="{% static 'images/ineuron-logo-white.png' %}" alt="logo">
+                </a>
+            </div>
+            <div class="Msearch">
+                <form action="search" method="get">
+                    <input type="hidden" name="search_username" value="{{user.username}}">
+                    <select name="select_search" class="form-select">
+                        <option value="0">All</option>
+                        <option value="title">Book Name</option>
+                        <option value="author">Author</option>
+                        <option value="category">Category</option>
+                    </select>
+                    <input type="search" name="search_text" placeholder="Type here to search..." class="form-control">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </form>
+            </div>
+            <div class="accounts">
+                <ul>
+                    <li>
+                        <span>Books</span>
+                        <div class="dropdown-content">
+                            <a href="{% url 'add-new-book' %}" target="_blank">Add book</a>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <span>Staff/Students</span>
+                        <div class="dropdown-content">
+                            <!-- librarian details -->
+                            <form action="{% url 'm-loading-librarian-details' %}" method="post" id="librarian_details_form">
+                                {% csrf_token %}
+                                <input type="hidden" name="username_librarian_details" value="{{user.username}}">
+                                <a href="javascript:" id="librarian_details" onclick="loading_librarian_details()">Librarians</a>
+                            </form>
+
+                            <!-- student details -->
+                            <form action="{% url 'm-loading-student-details' %}" method="post" id="student_details_form">
+                                {% csrf_token %}
+                                <input type="hidden" name="username_student_details" value="{{ user.username }}">
+                                <a href="javascript:" onclick="loading_student_details()">Students</a>
+                            </form>
+
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <span>Profile</span>
+                        <div class="dropdown-content-profile">
+                            <form action="{% url 'management-change-mode' %}" id="change_mode" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ user.username }}" name="username">
+                                {% if mode == 'Light Mode' %}
+                                <input type="hidden" name="mode" value="Dark Mode">
+                                <a href="javascript:" onclick="m_change_mode()">Dark Mode</a>
+                                {% elif mode == 'Dark Mode' %}
+                                <input type="hidden" name="mode" value="Light Mode">
+                                <a href="javascript:" onclick="m_change_mode()">Light Mode</a>
+                                {% endif %}
+                            </form>
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- nav bar content ends here-->
+    
+    <!-- name and wishes starts here -->
+
+    <div class="wishes">
+        <h3 class="">Hello {{ user.username|title }}, Good {{ wishes }}...</h3>
+
+    </div>
+
+    <!-- name and wishes ends here -->
+
+    <!-- books work starts here -->
+
+    <div class="booksInfo">
+        <div class="books">
+
+            {% for book in books %}
+            <a href="{% url 'management-book-details' book.id %}" target="_blank">
+            <div class="book">
+                <div class="book1">
+                    {% if book.category == "bachelor-of-arts" %}
+                    <img src="{% static 'images/ba_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == "bba/bms" %}
+                    <img src="{% static 'images/bba_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'btech-bachlor-of-engg./tech' %}
+                    <img src="{% static 'images/btech_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'bachelor-of-commerce' %}
+                    <img src="{% static 'images/bcom_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'intermediate' %}
+                    <img src="{% static 'images/inter_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'bachelor-of-law' %}
+                    <img src="{% static 'images/law_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'mbbs-bachelor-of-medicine' %}
+                    <img src="{% static 'images/mbbs_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'bachelor-of-science' %}
+                    <img src="{% static 'images/bsc_new.png' %}" alt="{{ book.category }}">
+                    {% elif book.category == 'ssc-10th-standard' %}
+                    <img src="{% static 'images/ssc_new.png' %}" alt="{{ book.category }}">
+                    {% else %}
+                    <img src="{% static 'images/landing_page.png' %}" alt="{{ book.category }}">
+                    {% endif %}
+                </div>
+                <div class="book2">
+                    <span> <b>Name:</b> {{ book.title|title }}</span><br>
+                    <span> <b>Author:</b>  {{ book.author|title }}</span><br>
+                    <span> <b>Available:</b>  {{ book.available_count|title }}</span>
+                    <div class="book3">
+                        <form action="{% url 'delete-book' %}" id="m_delete_book" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_username" value="{{user.username}}">
+                            <input type="hidden" name="delete_book_id" value="{{book.id}}">
+                            <button class="btn btn-danger" onclick="loadMessages()"> Delete </button>
+                        </form>
+                        <a href="{% url 'update-navigation' book.id %}" id="update_book" class="btn btn-success" target="_blank">Update</a>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- books work ends here -->
+
+
+
+    <!-- js work starts here -->
+
+    <script>
+
+        // mode effect starts here
+            
+       window.onload = ()=>{
+        if('{{mode}}'=='Light Mode'){
+            document.body.classList.add('bodyLight')
+            document.querySelector('h3').classList.add('h3Light')
+            document.querySelector('.MnavBar').classList.add('MnavBarLight')
+            document.querySelector('.book').classList.add('.bookLight')
+        } else if('{{mode}}'=='Dark Mode'){
+            document.body.classList.remove('bodyLight')
+            document.querySelector('h3').classList.remove('h3Light')
+            document.querySelector('.MnavBar').classList.remove('MnavBarLight')
+            document.querySelector('.book').classList.remove('.bookLight')
+        }
+       }
+
+        // mode effect ends here
+
+        // change mode in home starts here
+
+        function m_change_mode(){
+            let m_form = document.querySelector('#change_mode')
+            m_form.submit()
+        }
+
+        // change mode in home ends here
+
+        // librarian navigation starts here
+
+        let librarian_details = document.querySelector('#librarian_details')
+        function loading_librarian_details() {
+            let librarian_details_form = document.querySelector('#librarian_details_form')
+            librarian_details_form.submit()
+        }
+
+        // librarian navigation ends here
+
+        // students navigation starts here
+
+        function loading_student_details() {
+            let student_details_form = document.querySelector('#student_details_form')
+            student_details_form.submit()
+        }
+
+        // student navigation ends here
+
+// delete popup
+    function deleteBook(){
+        form_delete_book = document.querySelector('#m_delete_book')
+        loadMessages()
+        form_delete_book.submit()
+    }
+    function loadMessages(){
+        alert('Successfully deleted book...')
+    }
+    </script>
+
+    <!-- js work ends here -->
+{% endblock %}
+
+
+
+
